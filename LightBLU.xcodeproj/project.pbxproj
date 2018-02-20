@@ -14,6 +14,7 @@
 		42CB096B203CC2DF0001EAFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42CB0969203CC2DF0001EAFF /* LaunchScreen.storyboard */; };
 		42CB0976203CC2DF0001EAFF /* LightBLUTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CB0975203CC2DF0001EAFF /* LightBLUTests.swift */; };
 		42CB0981203CC2DF0001EAFF /* LightBLUUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CB0980203CC2DF0001EAFF /* LightBLUUITests.swift */; };
+		42CB098F203CC32C0001EAFF /* 71OTj5AEFtL._SL1001_.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 42CB098E203CC32B0001EAFF /* 71OTj5AEFtL._SL1001_.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		42CB097C203CC2DF0001EAFF /* LightBLUUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LightBLUUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42CB0980203CC2DF0001EAFF /* LightBLUUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightBLUUITests.swift; sourceTree = "<group>"; };
 		42CB0982203CC2DF0001EAFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42CB098E203CC32B0001EAFF /* 71OTj5AEFtL._SL1001_.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 71OTj5AEFtL._SL1001_.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		42CB095F203CC2DF0001EAFF /* LightBLU */ = {
 			isa = PBXGroup;
 			children = (
+				42CB098E203CC32B0001EAFF /* 71OTj5AEFtL._SL1001_.jpg */,
 				42CB0960203CC2DF0001EAFF /* AppDelegate.swift */,
 				42CB0962203CC2DF0001EAFF /* ViewController.swift */,
 				42CB0964203CC2DF0001EAFF /* Main.storyboard */,
@@ -234,6 +237,7 @@
 			files = (
 				42CB096B203CC2DF0001EAFF /* LaunchScreen.storyboard in Resources */,
 				42CB0968203CC2DF0001EAFF /* Assets.xcassets in Resources */,
+				42CB098F203CC32C0001EAFF /* 71OTj5AEFtL._SL1001_.jpg in Resources */,
 				42CB0966203CC2DF0001EAFF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,9 +431,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RC28LEG9DG;
 				INFOPLIST_FILE = LightBLU/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = UHCK.LightBLU;
+				PRODUCT_BUNDLE_IDENTIFIER = UHCL.LightBLU;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -441,9 +446,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RC28LEG9DG;
 				INFOPLIST_FILE = LightBLU/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = UHCK.LightBLU;
+				PRODUCT_BUNDLE_IDENTIFIER = UHCL.LightBLU;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
