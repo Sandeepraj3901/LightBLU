@@ -57,6 +57,49 @@ class CollectionViewController: UICollectionViewController {
         //cells.ImgLb.text = "image 1"
         return cells
     }
+    
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let mainStoryboard:UIStoryboard = UIStoryboard(name:"Main", bundle : nil)
+        switch(indexPath.row)
+        {
+            
+        case 0:     print(indexPath.row)
+                    let desVC = mainStoryboard.instantiateViewController(withIdentifier: "BluetoothScreenViewController") as! BluetoothScreenViewController
+                    self.navigationController?.pushViewController(desVC, animated: true)
+        
+                    break
+        case 1:     print(indexPath.row)
+                    let desVC = mainStoryboard.instantiateViewController(withIdentifier: "LEDScreenViewController") as! LEDScreenViewController
+                    self.navigationController?.pushViewController(desVC, animated: true)
+        
+                    break
+        case 2:     print(indexPath.row)
+                    let desVC = mainStoryboard.instantiateViewController(withIdentifier: "AppleScreenViewController") as! AppleScreenViewController
+                    self.navigationController?.pushViewController(desVC, animated: true)
+        
+                    break
+        case 3:     print(indexPath.row)
+                    let desVC = mainStoryboard.instantiateViewController(withIdentifier: "QRScanViewController") as! QRScanViewController
+                    self.navigationController?.pushViewController(desVC, animated: true)
+        
+                    break
+        case 4:     print(indexPath.row)
+                    let desVC = mainStoryboard.instantiateViewController(withIdentifier: "SettingsScreenViewController") as! SettingsScreenViewController
+                    self.navigationController?.pushViewController(desVC, animated: true)
+        case 5:     print(indexPath.row)
+                    let desVC = mainStoryboard.instantiateViewController(withIdentifier: "ScheduleScreenViewController") as! ScheduleScreenViewController
+                    self.navigationController?.pushViewController(desVC, animated: true)
+        
+                    break
+        
+            
+            
+        default:    print("in Default")
+                    break
+        }
+        }
 
     // MARK: UICollectionViewDelegate
 
