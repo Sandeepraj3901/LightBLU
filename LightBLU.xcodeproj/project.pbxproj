@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4266CBA3203E31A000BC2438 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4266CBA2203E31A000BC2438 /* CollectionViewController.swift */; };
 		42CB0961203CC2DF0001EAFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CB0960203CC2DF0001EAFF /* AppDelegate.swift */; };
 		42CB0966203CC2DF0001EAFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42CB0964203CC2DF0001EAFF /* Main.storyboard */; };
 		42CB0968203CC2DF0001EAFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42CB0967203CC2DF0001EAFF /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4266CBA2203E31A000BC2438 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		42CB095D203CC2DF0001EAFF /* LightBLU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightBLU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42CB0960203CC2DF0001EAFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42CB0965203CC2DF0001EAFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				42CB0960203CC2DF0001EAFF /* AppDelegate.swift */,
 				42CB099A203D0A1C0001EAFF /* MainCollectionViewCell.swift */,
 				42CB099C203D0F750001EAFF /* LaunchViewController.swift */,
+				4266CBA2203E31A000BC2438 /* CollectionViewController.swift */,
 				42CB0964203CC2DF0001EAFF /* Main.storyboard */,
 				42CB0967203CC2DF0001EAFF /* Assets.xcassets */,
 				42CB0969203CC2DF0001EAFF /* LaunchScreen.storyboard */,
@@ -266,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4266CBA3203E31A000BC2438 /* CollectionViewController.swift in Sources */,
 				42CB0961203CC2DF0001EAFF /* AppDelegate.swift in Sources */,
 				42CB099B203D0A1C0001EAFF /* MainCollectionViewCell.swift in Sources */,
 				42CB099D203D0F750001EAFF /* LaunchViewController.swift in Sources */,
