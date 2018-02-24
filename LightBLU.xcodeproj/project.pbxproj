@@ -23,6 +23,9 @@
 		42CB0999203D04470001EAFF /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 42CB0998203D04470001EAFF /* 1.jpg */; };
 		42CB099B203D0A1C0001EAFF /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CB099A203D0A1C0001EAFF /* MainCollectionViewCell.swift */; };
 		42CB099D203D0F750001EAFF /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CB099C203D0F750001EAFF /* LaunchViewController.swift */; };
+		42E7CFE02040EE7B002DE36C /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42E7CFDF2040EE7B002DE36C /* CoreBluetooth.framework */; };
+		42E7CFE22040EE84002DE36C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42E7CFE12040EE84002DE36C /* AVFoundation.framework */; };
+		42E7CFE42040EE91002DE36C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42E7CFE32040EE91002DE36C /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +68,9 @@
 		42CB0998203D04470001EAFF /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 1.jpg; path = Assets.xcassets/1.imageset/1.jpg; sourceTree = "<group>"; };
 		42CB099A203D0A1C0001EAFF /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		42CB099C203D0F750001EAFF /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		42E7CFDF2040EE7B002DE36C /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		42E7CFE12040EE84002DE36C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		42E7CFE32040EE91002DE36C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +78,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42E7CFE42040EE91002DE36C /* UIKit.framework in Frameworks */,
+				42E7CFE22040EE84002DE36C /* AVFoundation.framework in Frameworks */,
+				42E7CFE02040EE7B002DE36C /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +108,7 @@
 				42CB0974203CC2DF0001EAFF /* LightBLUTests */,
 				42CB097F203CC2DF0001EAFF /* LightBLUUITests */,
 				42CB095E203CC2DF0001EAFF /* Products */,
+				42E7CFDE2040EE7B002DE36C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -150,6 +160,16 @@
 				42CB0982203CC2DF0001EAFF /* Info.plist */,
 			);
 			path = LightBLUUITests;
+			sourceTree = "<group>";
+		};
+		42E7CFDE2040EE7B002DE36C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				42E7CFE32040EE91002DE36C /* UIKit.framework */,
+				42E7CFE12040EE84002DE36C /* AVFoundation.framework */,
+				42E7CFDF2040EE7B002DE36C /* CoreBluetooth.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
