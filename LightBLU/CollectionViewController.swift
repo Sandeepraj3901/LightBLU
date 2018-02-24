@@ -13,7 +13,7 @@ private let reuseIdentifier = "Cell"
 class CollectionViewController: UICollectionViewController {
    
     
-    let Imagesarry=[UIImage(named:"8.jpg"),UIImage(named:"7.jpg"),UIImage(named:"1.jpg"),UIImage(named:"10.jpg"),UIImage(named:"5.jpg"),UIImage(named:"6.jpg"),]
+    let Imagesarry=[UIImage(named:"8.jpg"),UIImage(named:"7.jpg"),UIImage(named:"m.jpg"),UIImage(named:"10.jpg"),UIImage(named:"5.jpg"),UIImage(named:"6.jpg"),]
     
     override func viewDidLoad() {
         super.viewDidLoad()
