@@ -90,14 +90,20 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
       
         let device = (advertisementData as NSDictionary).object(forKey: CBAdvertisementDataLocalNameKey )
             as? NSString
-        self.tableView.reloadData()
+       self.tableView.reloadData()
         //CBAdvertisementDataLocalNameKey
         
-        print("Devices:\(String(describing: device))")
+     
        
-        //if device?.contains(String(describing: B_UUID)) == true{
-        if(peripheral.name == NAME){
-                print("23454556666")
+        if device?.contains(String(describing: B_UUID)) == true{
+//        var peripherals = [CBPeripheral]()
+//        if (!peripherals.contains(peripheral)) {
+//
+//            let localName = peripheral.name
+//            print("\(String(describing: localName))" )
+//            peripherals.append(peripheral)
+//           // tableView.reloadData()
+            print("23454556666")
             self.manager.stopScan()
             
             self.peripheral = peripheral
@@ -127,9 +133,9 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
             let thisService = service as CBService
             peripheral.discoverCharacteristics(nil, for: thisService)
             
-            /* if service.uuid == BSERVICE_UUID {
+            if service.uuid == BSERVICE_UUID {
              peripheral.discoverCharacteristics(nil, for: thisService)
-             }*/
+             }
         }
     }
     

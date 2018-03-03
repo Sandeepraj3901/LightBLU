@@ -44,8 +44,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="qED-8v-ok6">
-                                <rect key="frame" x="41" y="64" width="294" height="236"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="0.0" y="64" width="368" height="269"/>
+                                <autoresizingMask key="autoresizingMask"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QdK-UF-Flx">
                                 <rect key="frame" x="173" y="574" width="30" height="30"/>
@@ -482,24 +482,37 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="590-Yc-4fF">
-                                <rect key="frame" x="104" y="203" width="271" height="165"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                            </pickerView>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="fuw-Bh-Pop">
                                 <rect key="frame" x="155" y="385" width="222" height="30"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </slider>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rcu-53-RwQ">
+                                <rect key="frame" x="171" y="260" width="204" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="ONF-Wd-LMh" id="aaR-Hf-Phl"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="idd-Fe-Yr0"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="LED" id="cyM-ec-qu1"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="colorval" destination="HHL-SV-57C" id="ZSh-Ut-IFD"/>
+                        <outlet property="coloval" destination="Rcu-53-RwQ" id="vgX-Xd-V5X"/>
+                        <outlet property="idval" destination="69p-bn-bx0" id="T5L-vr-5fY"/>
+                        <outlet property="intensityval" destination="HHL-SV-57C" id="sNN-XC-yOe"/>
+                        <outlet property="switchval" destination="936-qx-AJ4" id="922-Qw-rnR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cjE-jI-ad4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="740" y="-1047"/>
+            <point key="canvasLocation" x="740" y="-1047.5262368815593"/>
         </scene>
         <!--QRScan-->
         <scene sceneID="2qo-jP-8KN">
