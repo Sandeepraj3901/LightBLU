@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		420F173E204A2A7E00077C89 /* BluetoothTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F173D204A2A7E00077C89 /* BluetoothTableViewController.swift */; };
 		4266CBA3203E31A000BC2438 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4266CBA2203E31A000BC2438 /* CollectionViewController.swift */; };
 		4266CBA5203E4C0F00BC2438 /* BluetoothScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4266CBA4203E4C0F00BC2438 /* BluetoothScreenViewController.swift */; };
 		4266CBA7203E5D7100BC2438 /* LEDScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4266CBA6203E5D7100BC2438 /* LEDScreenViewController.swift */; };
@@ -14,6 +15,13 @@
 		4266CBAB203E5D9B00BC2438 /* SettingsScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4266CBAA203E5D9B00BC2438 /* SettingsScreenViewController.swift */; };
 		4266CBAD203E5DAB00BC2438 /* ScheduleScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4266CBAC203E5DAB00BC2438 /* ScheduleScreenViewController.swift */; };
 		4266CBAF203E60F800BC2438 /* AppleScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4266CBAE203E60F800BC2438 /* AppleScreenViewController.swift */; };
+		426C0978204A05AC00249978 /* AWSDynamoDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 426C0977204A05AC00249978 /* AWSDynamoDB.framework */; };
+		426C0979204A05AC00249978 /* AWSDynamoDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 426C0977204A05AC00249978 /* AWSDynamoDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		426C097D204A063D00249978 /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 426C097C204A063D00249978 /* AWSCore.framework */; };
+		426C097E204A063D00249978 /* AWSCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 426C097C204A063D00249978 /* AWSCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		426C0981204A069B00249978 /* SampleDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426C0980204A069B00249978 /* SampleDB.swift */; };
+		426C0983204A096600249978 /* AWSAuthCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 426C0982204A096600249978 /* AWSAuthCore.framework */; };
+		426C0984204A096600249978 /* AWSAuthCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 426C0982204A096600249978 /* AWSAuthCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		42CB0961203CC2DF0001EAFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CB0960203CC2DF0001EAFF /* AppDelegate.swift */; };
 		42CB0966203CC2DF0001EAFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42CB0964203CC2DF0001EAFF /* Main.storyboard */; };
 		42CB0968203CC2DF0001EAFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42CB0967203CC2DF0001EAFF /* Assets.xcassets */; };
@@ -45,7 +53,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		426C097A204A05AC00249978 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				426C0984204A096600249978 /* AWSAuthCore.framework in Embed Frameworks */,
+				426C0979204A05AC00249978 /* AWSDynamoDB.framework in Embed Frameworks */,
+				426C097E204A063D00249978 /* AWSCore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		420F173D204A2A7E00077C89 /* BluetoothTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothTableViewController.swift; sourceTree = "<group>"; };
 		4266CBA2203E31A000BC2438 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		4266CBA4203E4C0F00BC2438 /* BluetoothScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothScreenViewController.swift; sourceTree = "<group>"; };
 		4266CBA6203E5D7100BC2438 /* LEDScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LEDScreenViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +78,10 @@
 		4266CBAA203E5D9B00BC2438 /* SettingsScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenViewController.swift; sourceTree = "<group>"; };
 		4266CBAC203E5DAB00BC2438 /* ScheduleScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleScreenViewController.swift; sourceTree = "<group>"; };
 		4266CBAE203E60F800BC2438 /* AppleScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleScreenViewController.swift; sourceTree = "<group>"; };
+		426C0977204A05AC00249978 /* AWSDynamoDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSDynamoDB.framework; sourceTree = "<group>"; };
+		426C097C204A063D00249978 /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSCore.framework; sourceTree = "<group>"; };
+		426C0980204A069B00249978 /* SampleDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleDB.swift; sourceTree = "<group>"; };
+		426C0982204A096600249978 /* AWSAuthCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSAuthCore.framework; sourceTree = "<group>"; };
 		42CB095D203CC2DF0001EAFF /* LightBLU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightBLU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42CB0960203CC2DF0001EAFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42CB0965203CC2DF0001EAFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -79,7 +108,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				42E7CFE42040EE91002DE36C /* UIKit.framework in Frameworks */,
+				426C097D204A063D00249978 /* AWSCore.framework in Frameworks */,
 				42E7CFE22040EE84002DE36C /* AVFoundation.framework in Frameworks */,
+				426C0983204A096600249978 /* AWSAuthCore.framework in Frameworks */,
+				426C0978204A05AC00249978 /* AWSDynamoDB.framework in Frameworks */,
 				42E7CFE02040EE7B002DE36C /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -101,9 +133,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		426C097F204A067400249978 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				426C0980204A069B00249978 /* SampleDB.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		42CB0954203CC2DF0001EAFF = {
 			isa = PBXGroup;
 			children = (
+				426C0982204A096600249978 /* AWSAuthCore.framework */,
+				426C097F204A067400249978 /* Model */,
+				426C097C204A063D00249978 /* AWSCore.framework */,
+				426C0977204A05AC00249978 /* AWSDynamoDB.framework */,
 				42CB095F203CC2DF0001EAFF /* LightBLU */,
 				42CB0974203CC2DF0001EAFF /* LightBLUTests */,
 				42CB097F203CC2DF0001EAFF /* LightBLUUITests */,
@@ -126,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				42CB0998203D04470001EAFF /* 1.jpg */,
+				420F173D204A2A7E00077C89 /* BluetoothTableViewController.swift */,
 				42CB0960203CC2DF0001EAFF /* AppDelegate.swift */,
 				42CB099A203D0A1C0001EAFF /* MainCollectionViewCell.swift */,
 				42CB099C203D0F750001EAFF /* LaunchViewController.swift */,
@@ -182,6 +227,8 @@
 				42CB0959203CC2DF0001EAFF /* Sources */,
 				42CB095A203CC2DF0001EAFF /* Frameworks */,
 				42CB095B203CC2DF0001EAFF /* Resources */,
+				426C097A204A05AC00249978 /* Embed Frameworks */,
+				426C097B204A05D500249978 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -302,6 +349,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		426C097B204A05D500249978 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework/strip-frameworks.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		42CB0959203CC2DF0001EAFF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -309,8 +372,10 @@
 			files = (
 				4266CBA3203E31A000BC2438 /* CollectionViewController.swift in Sources */,
 				4266CBAB203E5D9B00BC2438 /* SettingsScreenViewController.swift in Sources */,
+				420F173E204A2A7E00077C89 /* BluetoothTableViewController.swift in Sources */,
 				42CB0961203CC2DF0001EAFF /* AppDelegate.swift in Sources */,
 				4266CBA7203E5D7100BC2438 /* LEDScreenViewController.swift in Sources */,
+				426C0981204A069B00249978 /* SampleDB.swift in Sources */,
 				4266CBAD203E5DAB00BC2438 /* ScheduleScreenViewController.swift in Sources */,
 				4266CBAF203E60F800BC2438 /* AppleScreenViewController.swift in Sources */,
 				4266CBA9203E5D8700BC2438 /* QRScanViewController.swift in Sources */,
@@ -484,6 +549,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RC28LEG9DG;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = LightBLU/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = UHCL.LightBLU;
@@ -499,6 +568,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RC28LEG9DG;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = LightBLU/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = UHCL.LightBLU;
