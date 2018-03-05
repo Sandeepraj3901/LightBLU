@@ -19,8 +19,8 @@ class ScheduleScreenViewController: UIViewController, UIPickerViewDataSource, UI
     @IBOutlet weak var alarmtextfield: UITextField!
     @IBOutlet weak var intensitytextfield: UITextField!
     @IBOutlet weak var colortextfield: UITextField!
-    @IBOutlet weak var Bid: UILabel!
-    @IBOutlet weak var Bidtextfield: UITextField!
+    @IBOutlet weak var Id: UILabel!
+    @IBOutlet weak var Idtextfield: UITextField!
     @IBAction func Switch(_ sender: Any) {
     
         print(" need to take action")

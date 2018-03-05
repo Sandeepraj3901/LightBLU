@@ -11,18 +11,19 @@ import AWSDynamoDB
 import AWSAuthCore
 import AWSCore
 
-class SampleDB: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
+ class SampleDB: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
-    var bid: String?
+    var id: String?
+    //var id2: String?
     static func dynamoDBTableName() -> String {
         
-        return "bid"
+        return "Sample"
         
     }
     
     static func hashKeyAttribute() -> String {
-    
-        return "bid"
+     
+        return "id"
     }
     
 

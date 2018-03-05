@@ -7,10 +7,17 @@
 //
 
 import UIKit
+import AWSDynamoDB
+import AWSAuthCore
+import AWSCore
+import AWSCognito
+
 
 class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
+ 
+    
 
-  
+   //let DynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
     @IBOutlet weak var switchval: UISwitch!
     @IBOutlet weak var idval: UITextField!
     
@@ -22,14 +29,65 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
      var pickerView = UIPickerView()
     override func viewDidLoad() {
         
-      
-       
             self.navigationItem.title = "LED SCREEN";
             super.viewDidLoad()
             pickUp(coloval)
-
+            createid()
         // Do any additional setup after loading the view.
     }
+    
+    
+    func createid() {
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast2,
+                                                                identityPoolId:"us-east-2:c8faefba-b803-45ca-9f5e-40d12a001789")
+        
+        let configuration = AWSServiceConfiguration(region:.USEast2, credentialsProvider:credentialsProvider)
+        
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
+        let DynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
+        let syncClient = AWSCognito.default()
+        
+        // Create a record in a dataset and synchronize with the server
+       let dataset = syncClient.openOrCreateDataset("myDataset")
+        dataset.setString("welcome", forKey:"id")
+        dataset.synchronize().continueWith {(task: AWSTask!) -> AnyObject! in
+            // Your handler code here
+            return nil
+            
+        }
+       let player: SampleDB = SampleDB()
+        
+        //let s: String = "hello"
+        player.id = "hello" as String
+        //player.id2 = "welcome"
+        //let dynamoDbObjectMapper = AWSDynamoDBObjectMapper.default()
+        
+        // Create data object using data models you downloaded from Mobile Hub
+        
+        //Save a new item
+  
+        DynamoDBObjectMapper.save(player, completionHandler: {
+            (error: Error?) -> Void in
+            
+            if let error = error {
+                print("Amazon DynamoDB Save Error: \(error)")
+                return
+            }
+            print("An item was saved.")
+        })
+
+    
+     /*   DynamoDBObjectMapper.save(player).continueWith(block: {(task:AWSTask<AnyObject>!) -> Any? in
+            if let error = task.error as NSError? {
+    print("The request failed. Error: \(error)")
+    } else {
+        print (task.result as Any)
+    // Do something with task.result or perform other operations.
+    }
+        return task
+            
+        }) */
+}
     public func numberOfComponents(in pickerView: UIPickerView) -> Int{
         return 1;
     }
