@@ -11,31 +11,31 @@ import CoreBluetooth
 
 class BluetoothTableViewController: UITableViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
     
-    let NAME = "CSR1010"
+    let NAME = "iPhone"
     let B_UUID =
-        CBUUID(string: "24C6F950-039E-A382-09F2-ADAA64BD6EF8")
+        CBUUID(string: "5A8ADD90-A33D-5803-C623-40517908D5EF")
     let BSERVICE_UUID =
         CBUUID(string: "a495ff20-c5b1-4b44-b512-1370f02d74de")
-    var cell = [String]()
-    
+    var perip = Array<CBPeripheral>()
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(cell.count)
-        return cell.count
+        print(perip.count)
+        return perip.count
         
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cells = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as UITableViewCell
+        let peripheral1 = perip[indexPath.row]
         
-        cells.textLabel?.text = cell[indexPath.row]
-        print(cells)
+               cells.textLabel?.text = peripheral1.name
+        //print(cells)
         return cells
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if central.state == CBManagerState.poweredOn {
-            central.scanForPeripherals(withServices: nil, options: nil)
+            central.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : false])
             let alertController = UIAlertController(title: "Alert", message:
                 "Bluetooth is ON.", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
@@ -53,7 +53,7 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
     }
     
     var manager:CBCentralManager!
-    var peripheral:CBPeripheral!
+    var peripherals:CBPeripheral!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,20 +82,35 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
      }*/
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        print(peripheral)
-        cell.append(String(describing: peripheral.identifier))
+       
+        /*if(cell.contains(String(describing: peripheral.identifier.uuid)) == false && cell.count < 15)
+        {
+        cell.append(String(describing: peripheral.identifier.uuidString))
         
         print("welcome:\(cell)")
         print(cell.count)
-      
-        let device = (advertisementData as NSDictionary).object(forKey: CBAdvertisementDataLocalNameKey )
-            as? NSString
+        }*/
+        //print(peripherals)
+        //print("Discovered: \(String(describing: peripheral.name)) at \(RSSI)")
+        //print("AdvertisementData:\(advertisementData)")
+        if (peripherals != peripheral && peripheral.name != nil)
+        {
+            peripherals = peripheral
+            print(peripherals)
+            perip.append(peripherals)
+        }
        self.tableView.reloadData()
+       /* let device = (advertisementData as NSDictionary).object(forKey: CBAdvertisementDataLocalNameKey )
+            as? NSString
+        print(String(describing: device))
         //CBAdvertisementDataLocalNameKey
         
-     
+     */
        
-        if device?.contains(String(describing: B_UUID)) == true{
+        if peripheral.name == "Prasanth’s AirPods"
+        {
+           // self.tableView.refreshControl?.beginRefreshing()
+            manager.connect(peripherals, options: nil)
 //        var peripherals = [CBPeripheral]()
 //        if (!peripherals.contains(peripheral)) {
 //
@@ -106,15 +121,16 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
             print("23454556666")
             self.manager.stopScan()
             
-            self.peripheral = peripheral
-            self.peripheral.delegate = self
+            self.peripherals = peripheral
+            self.peripherals.delegate = self
             
-            manager.connect(peripheral, options: nil)
+            //manager.connect(peripheral, options: nil)
             
         }
         else
         {
-            print("no UUID")
+            print("no device found")
+            //self.manager.stopScan()
         }
         }
     
@@ -122,7 +138,7 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
     func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
         peripheral.discoverServices(nil)
         peripheral.delegate = self
-        peripheral.discoverServices(nil)
+       
         
         print("CONNECTED")
         
@@ -144,7 +160,7 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
             let thisCharacteristic = characteristic as CBCharacteristic
             print(thisCharacteristic.uuid)
             if thisCharacteristic.uuid == B_UUID {
-                self.peripheral.setNotifyValue(true, for: thisCharacteristic)
+                self.peripherals.setNotifyValue(true, for: thisCharacteristic)
             }
         }
     }

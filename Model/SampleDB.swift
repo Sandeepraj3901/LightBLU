@@ -10,6 +10,7 @@ import UIKit
 import AWSDynamoDB
 import AWSAuthCore
 import AWSCore
+import AWSCognito
 
  class SampleDB: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
@@ -17,13 +18,13 @@ import AWSCore
     //var id2: String?
     static func dynamoDBTableName() -> String {
         
-        return "Sample"
+        return "Sample1"
         
     }
     
     static func hashKeyAttribute() -> String {
      
-        return "id"
+        return "userid"
     }
     
 

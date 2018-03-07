@@ -12,6 +12,7 @@ class LaunchViewController: UIViewController {
       
     override func viewDidLoad() {
         super.viewDidLoad()
+         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
 
         // Do any additional setup after loading the view.
     }

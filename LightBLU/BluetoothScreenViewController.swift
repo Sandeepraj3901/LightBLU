@@ -16,6 +16,10 @@ let BSERVICE_UUID =
 var cell = [String]()
 
 class BluetoothScreenViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate, UITableViewDelegate, UITableViewDataSource{
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        return
+    }
+    
    
  
     
@@ -32,9 +36,9 @@ class BluetoothScreenViewController: UIViewController, CBCentralManagerDelegate,
         return cells
     }
     
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+    /*func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if central.state == CBManagerState.poweredOn {
-            central.scanForPeripherals(withServices: nil, options: nil)
+            central.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : false])
             let alertController = UIAlertController(title: "Alert", message:
                 "Bluetooth is ON.", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
@@ -50,10 +54,10 @@ class BluetoothScreenViewController: UIViewController, CBCentralManagerDelegate,
             self.present(alertController, animated: true, completion: nil)
         }
     }
-
+*/
     var manager:CBCentralManager!
     var peripheral:CBPeripheral!
-    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         manager = CBCentralManager(delegate: self, queue: nil)
@@ -78,12 +82,13 @@ class BluetoothScreenViewController: UIViewController, CBCentralManagerDelegate,
         }*/
     }*/
     
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        print("hello:\(String(describing: peripheral.identifier))")
-        cell.append(String(describing: peripheral.identifier))
+   /* func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        print("hello:\(String(describing: peripheral.name))")
+        cell.append(String(describing: peripheral.name))
+        
         let device = (advertisementData as NSDictionary).object(forKey: CBAdvertisementDataLocalNameKey)
             as? NSString
-        if device?.contains("") == true{
+        if device?.contains("CSR1010") == true{
             self.manager.stopScan()
             
             self.peripheral = peripheral
@@ -97,7 +102,6 @@ class BluetoothScreenViewController: UIViewController, CBCentralManagerDelegate,
     func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
         peripheral.discoverServices(nil)
         peripheral.delegate = self
-        peripheral.discoverServices(nil)
         
     }
     
@@ -146,7 +150,7 @@ class BluetoothScreenViewController: UIViewController, CBCentralManagerDelegate,
     }
     */
 
-    
+    */
     
     
 }

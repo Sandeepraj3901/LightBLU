@@ -27,12 +27,15 @@ class ScheduleScreenViewController: UIViewController, UIPickerViewDataSource, UI
     
     }
     
+    
+    
     let colorval = ["Yellow", "Red", "Blue","Green","White","Orange","Black"]
     var pickerView = UIPickerView()
     let datePicker = UIDatePicker()
     override func viewDidLoad() {
         self.navigationItem.title = "Scheduler";
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
              pickUp(colortextfield)
         showDatePicker()
         
