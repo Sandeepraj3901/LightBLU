@@ -130,6 +130,9 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <segue destination="qdQ-We-GLM" kind="show" identifier="TabletoDevice" id="sld-u7-v64"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -144,6 +147,33 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zuc-XJ-Sg1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-34" y="-1819"/>
+        </scene>
+        <!--Device View Controller-->
+        <scene sceneID="Iy7-uc-Eeq">
+            <objects>
+                <viewController id="qdQ-We-GLM" customClass="DeviceViewController" customModule="LightBLU" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RFY-Js-U5P">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cr5-bM-aQX">
+                                <rect key="frame" x="61" y="98" width="252" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.050018567399999998" green="0.58527876310000004" blue="0.74934560490000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <viewLayoutGuide key="safeArea" id="6sm-J0-nF7"/>
+                    </view>
+                    <connections>
+                        <outlet property="DeviceLabel" destination="Cr5-bM-aQX" id="hvg-3y-3WA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VyT-0D-Yyd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="765.60000000000002" y="-1829.2353823088458"/>
         </scene>
         <!--Bluetooth-->
         <scene sceneID="t3g-nR-rCD">

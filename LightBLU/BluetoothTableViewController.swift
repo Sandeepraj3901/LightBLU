@@ -11,7 +11,7 @@ import CoreBluetooth
 
 class BluetoothTableViewController: UITableViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
     
-    let NAME = "iPhone"
+    var name: String = " "
     let B_UUID =
         CBUUID(string: "5A8ADD90-A33D-5803-C623-40517908D5EF")
     let BSERVICE_UUID =
@@ -109,6 +109,8 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
        
         if peripheral.name == "Prasanth’s AirPods"
         {
+            name = peripheral.name!
+            print(name)
            // self.tableView.refreshControl?.beginRefreshing()
             manager.connect(peripherals, options: nil)
 //        var peripherals = [CBPeripheral]()
@@ -125,12 +127,16 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
             self.peripherals.delegate = self
             
             //manager.connect(peripheral, options: nil)
-            
+            let viewControllerB = DeviceViewController()
+            viewControllerB.selectedName = name
+           
         }
         else
         {
             print("no device found")
             //self.manager.stopScan()
+            
+            
         }
         }
     
@@ -188,7 +194,12 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
      }
      */
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "TabletoDevice") {
+            let vc = segue.destination as! DeviceViewController
+            vc.selectedName = name
+        }
+    }
     
     
 }
