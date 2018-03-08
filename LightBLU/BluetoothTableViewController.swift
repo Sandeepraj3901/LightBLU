@@ -106,29 +106,19 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
         //CBAdvertisementDataLocalNameKey
         
      */
-       
-        if peripheral.name == "Prasanth’s AirPods"
+       if(peripheral.name != nil)
+       {
+        name = peripheral.name!
+        if peripheral.name == "estimote"
         {
-            name = peripheral.name!
-            print(name)
-           // self.tableView.refreshControl?.beginRefreshing()
+            
+            print("Found:\(name)")
             manager.connect(peripherals, options: nil)
-//        var peripherals = [CBPeripheral]()
-//        if (!peripherals.contains(peripheral)) {
-//
-//            let localName = peripheral.name
-//            print("\(String(describing: localName))" )
-//            peripherals.append(peripheral)
-//           // tableView.reloadData()
             print("23454556666")
             self.manager.stopScan()
             
             self.peripherals = peripheral
             self.peripherals.delegate = self
-            
-            //manager.connect(peripheral, options: nil)
-            let viewControllerB = DeviceViewController()
-            viewControllerB.selectedName = name
            
         }
         else
@@ -139,7 +129,7 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
             
         }
         }
-    
+    }
     
     func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
         peripheral.discoverServices(nil)

@@ -24,6 +24,7 @@
 		4266CBAD203E5DAB00BC2438 /* ScheduleScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4266CBAC203E5DAB00BC2438 /* ScheduleScreenViewController.swift */; };
 		4266CBAF203E60F800BC2438 /* AppleScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4266CBAE203E60F800BC2438 /* AppleScreenViewController.swift */; };
 		426C0981204A069B00249978 /* SampleDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426C0980204A069B00249978 /* SampleDB.swift */; };
+		42A323132050D4800047390A /* QRDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A323122050D4800047390A /* QRDetailsViewController.swift */; };
 		42CB0961203CC2DF0001EAFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CB0960203CC2DF0001EAFF /* AppDelegate.swift */; };
 		42CB0966203CC2DF0001EAFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42CB0964203CC2DF0001EAFF /* Main.storyboard */; };
 		42CB0968203CC2DF0001EAFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42CB0967203CC2DF0001EAFF /* Assets.xcassets */; };
@@ -186,6 +187,7 @@
 		4266CBAC203E5DAB00BC2438 /* ScheduleScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleScreenViewController.swift; sourceTree = "<group>"; };
 		4266CBAE203E60F800BC2438 /* AppleScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleScreenViewController.swift; sourceTree = "<group>"; };
 		426C0980204A069B00249978 /* SampleDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleDB.swift; sourceTree = "<group>"; };
+		42A323122050D4800047390A /* QRDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRDetailsViewController.swift; sourceTree = "<group>"; };
 		42CB095D203CC2DF0001EAFF /* LightBLU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightBLU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42CB0960203CC2DF0001EAFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42CB0965203CC2DF0001EAFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 				4266CBA2203E31A000BC2438 /* CollectionViewController.swift */,
 				4266CBA4203E4C0F00BC2438 /* BluetoothScreenViewController.swift */,
 				4266CBA6203E5D7100BC2438 /* LEDScreenViewController.swift */,
+				42A323122050D4800047390A /* QRDetailsViewController.swift */,
 				4266CBA8203E5D8700BC2438 /* QRScanViewController.swift */,
 				4266CBAA203E5D9B00BC2438 /* SettingsScreenViewController.swift */,
 				4266CBAC203E5DAB00BC2438 /* ScheduleScreenViewController.swift */,
@@ -609,6 +612,7 @@
 				4266CBAB203E5D9B00BC2438 /* SettingsScreenViewController.swift in Sources */,
 				420F173E204A2A7E00077C89 /* BluetoothTableViewController.swift in Sources */,
 				42CB0961203CC2DF0001EAFF /* AppDelegate.swift in Sources */,
+				42A323132050D4800047390A /* QRDetailsViewController.swift in Sources */,
 				4266CBA7203E5D7100BC2438 /* LEDScreenViewController.swift in Sources */,
 				426C0981204A069B00249978 /* SampleDB.swift in Sources */,
 				4266CBAD203E5DAB00BC2438 /* ScheduleScreenViewController.swift in Sources */,

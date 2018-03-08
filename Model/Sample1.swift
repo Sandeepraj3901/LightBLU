@@ -15,7 +15,7 @@ import AWSCognito
 
 class Sample1: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
-    var userid: NSString?
+    var userid: String = ""
     //var id2: String?
     static func dynamoDBTableName() -> String {
         

@@ -573,7 +573,9 @@
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yEX-zJ-rDR">
                                 <rect key="frame" x="137.5" y="318.5" width="100" height="30"/>
-                                <state key="normal" title="Scan QR Code"/>
+                                <state key="normal" title="Scan QR Code">
+                                    <color key="titleColor" red="0.84789234399795532" green="0.46435832977294922" blue="0.060263819992542267" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="scanbtn:" destination="Jl2-dF-GrS" eventType="touchUpInside" id="J0S-y2-UnA"/>
                                 </connections>
@@ -582,7 +584,7 @@
                                 <rect key="frame" x="0.0" y="464" width="375" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.84789234399795532" green="0.46435832977294922" blue="0.060263819992542267" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -601,7 +603,42 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iKs-5l-1Ul" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1460" y="-1048"/>
+            <point key="canvasLocation" x="1460" y="-1048.4257871064469"/>
+        </scene>
+        <!--Details View Controller-->
+        <scene sceneID="5hX-xV-wte">
+            <objects>
+                <viewController id="Q3e-Ye-mjB" customClass="QRDetailsViewController" customModule="LightBLU" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wqa-F8-e5K">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYX-n5-x8W">
+                                <rect key="frame" x="0.0" y="85" width="375" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RSE-kT-u2c">
+                                <rect key="frame" x="0.0" y="267" width="359" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="JCT-eJ-esa"/>
+                    </view>
+                    <connections>
+                        <outlet property="Qrid" destination="qYX-n5-x8W" id="bHw-dT-RlH"/>
+                        <outlet property="Qrpwd" destination="RSE-kT-u2c" id="eAJ-pO-jRH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a19-Gs-C0P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2173.5999999999999" y="-1046.6266866566718"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EwH-l2-kdx">

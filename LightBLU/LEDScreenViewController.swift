@@ -16,7 +16,7 @@ import AWSCognito
 class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
  
     
-
+    let dname: String = " welcome"
    //let DynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
     @IBOutlet weak var switchval: UISwitch!
     @IBOutlet weak var idval: UITextField!
@@ -33,7 +33,8 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
             super.viewDidLoad()
              self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
             pickUp(coloval)
-            createid()
+            readval()
+           createid()
         // Do any additional setup after loading the view.
     }
     
@@ -64,10 +65,11 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
         // Create data object using data models you downloaded from Mobile Hub
         let newsItem: Sample1 = Sample1()
         
-        newsItem.userid? = "Welcome"
+        newsItem.userid = dname
             //AWSIdentityManager.default().identityId
 
         //Save a new item
+        print("value for db:\(newsItem))")
         dynamoDbObjectMapper.save(newsItem, completionHandler: {
             (error: Error?) -> Void in
            // NSLog((error as! NSString) as String)
@@ -79,6 +81,43 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
         })
         
 }
+    func readval() {
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast2,
+                                                                identityPoolId:"us-east-2:0c1abe18-9c04-48d9-a362-f4cdb698834f")
+        
+        let configuration = AWSServiceConfiguration(region:.USEast2, credentialsProvider:credentialsProvider)
+        
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
+        
+        
+        // Initialize the Cognito Sync client
+        let syncClient = AWSCognito.default()
+        
+        // Create a record in a dataset and synchronize with the server
+        let dataset = syncClient.openOrCreateDataset("myDataset")
+        dataset.setString("myValue", forKey:"myKey")
+        dataset.synchronize().continueWith {(task: AWSTask!) -> AnyObject! in
+            // Your handler code here
+            return nil
+            
+        }
+        let dynamoDbObjectMapper = AWSDynamoDBObjectMapper.default()
+        
+        // Create data object using data models you downloaded from Mobile Hub
+        let newsItem: Sample1 = Sample1();
+        //newsItem._userid = AWSIdentityManager.default().identityId
+        
+        dynamoDbObjectMapper.load(Sample1.self, hashKey: newsItem.userid, rangeKey: "userid",
+                  completionHandler: {
+                (objectModel: AWSDynamoDBObjectModel?, error: Error?) -> Void in
+                if let error = error {
+                    print("Amazon DynamoDB Read Error: \(error)")
+                    return
+                }
+                print("An item was read.")
+        })
+    }
+    
     public func numberOfComponents(in pickerView: UIPickerView) -> Int{
         return 1;
     }

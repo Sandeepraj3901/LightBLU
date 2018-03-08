@@ -10,7 +10,9 @@ import UIKit
 import AVFoundation
 
 class QRScanViewController: UIViewController {
-    
+   var password: String = ""
+    var qrtext: String = ""
+ 
     @IBOutlet weak var messageLabel: UILabel!
     var captureSession = AVCaptureSession()
     
@@ -102,6 +104,15 @@ class QRScanViewController: UIViewController {
         
         if (captureSession.isRunning == true) {
             captureSession.stopRunning()
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers
+            for aViewController in viewControllers {
+                if aViewController is LEDScreenViewController {
+                    let vc:LEDScreenViewController = LEDScreenViewController()
+                    vc.idval.text = messageLabel.text
+                    self.navigationController!.popToViewController(aViewController, animated: true)
+                    
+                }
+            }
         }
     }
     override func viewDidLoad() {
@@ -156,10 +167,38 @@ extension QRScanViewController: AVCaptureMetadataOutputObjectsDelegate {
             let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
             qrCodeFrameView?.frame = barCodeObject!.bounds
             
-            if metadataObj.stringValue != nil {
-                launchApp(decodedURL: metadataObj.stringValue!)
+            if metadataObj.stringValue != nil
+            {
+                 //launchApp(decodedURL: metadataObj.stringValue!)
+                //messageLabel.text = metadataObj.stringValue
+                //_ = navigationController?.popViewController(animated: true)
+               // let vc:QRScanViewController = QRScanViewController()
                 messageLabel.text = metadataObj.stringValue
+                qrtext = messageLabel.text!
+                let alert = UIAlertController(title: "Enter Master Password", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addTextField(configurationHandler: { textField in
+                    textField.placeholder = "Input your password here..."
+                    //textField.placeholder = "Password"
+                    textField.isSecureTextEntry = true
+                   
+                })
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                    
+                    if let name = alert.textFields?.first?.text {
+                        //print("Your name: \(name)")
+                        self.password = name
+                        print("Your QRCODE: \(self.qrtext)")
+                        print("Your Password: \(self.password)")
+                        self.captureSession.stopRunning()
+                    }
+                }))
+                self.present(alert, animated: true)
+                
             }
+            
         }
+       
     }
+  
 }
