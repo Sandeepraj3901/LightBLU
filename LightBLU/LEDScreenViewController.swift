@@ -40,36 +40,26 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
     
     
     public func createid() {
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast2,
-                                                                identityPoolId:"us-east-2:0c1abe18-9c04-48d9-a362-f4cdb698834f")
-        
-        let configuration = AWSServiceConfiguration(region:.USEast2, credentialsProvider:credentialsProvider)
-        
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
+//        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast2,
+//                                                                identityPoolId:"us-east-2:0c1abe18-9c04-48d9-a362-f4cdb698834f")
+//
+//        let configuration = AWSServiceConfiguration(region:.USEast2, credentialsProvider:credentialsProvider)
+//
+//        AWSServiceManager.default().defaultServiceConfiguration = configuration
+//
        
-        // Initialize the Cognito Sync client
-        let syncClient = AWSCognito.default()
-        
-        // Create a record in a dataset and synchronize with the server
-        let dataset = syncClient.openOrCreateDataset("myDataset")
-        dataset.setString("myValue", forKey:"myKey")
-        dataset.synchronize().continueWith {(task: AWSTask!) -> AnyObject! in
-            // Your handler code here
-            return nil
-            
-        }
+      
         
         let dynamoDbObjectMapper = AWSDynamoDBObjectMapper.default()
         
-        // Create data object using data models you downloaded from Mobile Hub
+        // Create data object using data models
         let newsItem: Sample1 = Sample1()
         
-        newsItem.userid = dname
+        newsItem.userid = AWSIdentityManager.default().identityId!
             //AWSIdentityManager.default().identityId
 
         //Save a new item
-        print("value for db:\(newsItem))")
+        print("value for db:\(newsItem.userid)")
         dynamoDbObjectMapper.save(newsItem, completionHandler: {
             (error: Error?) -> Void in
            // NSLog((error as! NSString) as String)
@@ -79,28 +69,24 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
             }
             print("An item was saved.")
         })
-        
-}
-    func readval() {
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast2,
-                                                                identityPoolId:"us-east-2:0c1abe18-9c04-48d9-a362-f4cdb698834f")
-        
-        let configuration = AWSServiceConfiguration(region:.USEast2, credentialsProvider:credentialsProvider)
-        
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        
         // Initialize the Cognito Sync client
         let syncClient = AWSCognito.default()
         
         // Create a record in a dataset and synchronize with the server
         let dataset = syncClient.openOrCreateDataset("myDataset")
-        dataset.setString("myValue", forKey:"myKey")
+        dataset.setString(newsItem.userid, forKey:"IdValue")
+        print(" saved to cognito")
         dataset.synchronize().continueWith {(task: AWSTask!) -> AnyObject! in
             // Your handler code here
             return nil
             
         }
+}
+    func readval() {
+       
+        
+        // Initialize the Cognito Sync client
+       
         let dynamoDbObjectMapper = AWSDynamoDBObjectMapper.default()
         
         // Create data object using data models you downloaded from Mobile Hub
@@ -116,6 +102,18 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
                 }
                 print("An item was read.")
         })
+        
+        let syncClient = AWSCognito.default()
+        
+        // Create a record in a dataset and synchronize with the server
+        let dataset = syncClient.openOrCreateDataset("myDataset2")
+        dataset.setString(newsItem.userid, forKey:"ReadValue")
+         print(" read to cognito")
+        dataset.synchronize().continueWith {(task: AWSTask!) -> AnyObject! in
+            // Your handler code here
+            return nil
+            
+        }
     }
     
     public func numberOfComponents(in pickerView: UIPickerView) -> Int{

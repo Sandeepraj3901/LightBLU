@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class QRScanViewController: UIViewController {
+class QRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate{
    var password: String = ""
     var qrtext: String = ""
  
@@ -102,7 +102,7 @@ class QRScanViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if (captureSession.isRunning == true) {
+        if (captureSession.isRunning == false) {
             captureSession.stopRunning()
             let viewControllers: [UIViewController] = self.navigationController!.viewControllers
             for aViewController in viewControllers {
@@ -147,9 +147,8 @@ class QRScanViewController: UIViewController {
         present(alertPrompt, animated: true, completion: nil)
     }
     
-}
-
-extension QRScanViewController: AVCaptureMetadataOutputObjectsDelegate {
+    
+    
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         // Check if the metadataObjects array is not nil and it contains at least one object.
@@ -166,16 +165,91 @@ extension QRScanViewController: AVCaptureMetadataOutputObjectsDelegate {
             // If the found metadata is equal to the QR code metadata (or barcode) then update the status label's text and set the bounds
             let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
             qrCodeFrameView?.frame = barCodeObject!.bounds
-            
+            let alert = UIAlertController(title: "Enter Master Password", message: nil, preferredStyle: UIAlertControllerStyle.alert)
             if metadataObj.stringValue != nil
             {
+                
+                //launchApp(decodedURL: metadataObj.stringValue!)
+                //messageLabel.text = metadataObj.stringValue
+                //_ = navigationController?.popViewController(animated: true)
+                // let vc:QRScanViewController = QRScanViewController()
+                messageLabel.text = metadataObj.stringValue
+                if( metadataObj.stringValue == "12345678")
+                {
+                    self.captureSession.stopRunning()
+                    view.willRemoveSubview(qrCodeFrameView!)
+                    qrtext = messageLabel.text!
+                    
+                    
+                    alert.addTextField(configurationHandler: { textField in
+                        textField.placeholder = "Input your password here..."
+                        //textField.placeholder = "Password"
+                        textField.isSecureTextEntry = true
+                        
+                    })
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                        
+                        if let name = alert.textFields?.first?.text {
+                            //print("Your name: \(name)")
+                            self.password = name
+                            print("Your QRCODE: \(self.qrtext)")
+                            print("Your Password: \(self.password)")
+                            let alert3 = UIAlertController(title: "Deviced Scanned - Please proceed", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                            alert3.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                            self.present(alert3, animated: true)
+                        }
+                    }))
+                    
+                    self.present(alert, animated: true)
+                }
+                else{
+                    let alert2 = UIAlertController(title: "This is not LED device", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                    alert2.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(alert2, animated: true)
+                }
+                
+                
+            }
+            
+        }
+        
+    }
+    
+}
+
+/*extension QRScanViewController: AVCaptureMetadataOutputObjectsDelegate {
+    
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        // Check if the metadataObjects array is not nil and it contains at least one object.
+        if metadataObjects.count == 0 {
+            qrCodeFrameView?.frame = CGRect.zero
+            messageLabel.text = "No QR code is detected"
+            return
+        }
+        
+        // Get the metadata object.
+        let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
+        
+        if supportedCodeTypes.contains(metadataObj.type) {
+            // If the found metadata is equal to the QR code metadata (or barcode) then update the status label's text and set the bounds
+            let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
+            qrCodeFrameView?.frame = barCodeObject!.bounds
+            let alert = UIAlertController(title: "Enter Master Password", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+            if metadataObj.stringValue != nil
+            {
+                
                  //launchApp(decodedURL: metadataObj.stringValue!)
                 //messageLabel.text = metadataObj.stringValue
                 //_ = navigationController?.popViewController(animated: true)
                // let vc:QRScanViewController = QRScanViewController()
                 messageLabel.text = metadataObj.stringValue
+                if( metadataObj.stringValue == "12345678")
+                {
+                    self.captureSession.stopRunning()
                 qrtext = messageLabel.text!
-                let alert = UIAlertController(title: "Enter Master Password", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                
+               
                 alert.addTextField(configurationHandler: { textField in
                     textField.placeholder = "Input your password here..."
                     //textField.placeholder = "Password"
@@ -190,15 +264,21 @@ extension QRScanViewController: AVCaptureMetadataOutputObjectsDelegate {
                         self.password = name
                         print("Your QRCODE: \(self.qrtext)")
                         print("Your Password: \(self.password)")
-                        self.captureSession.stopRunning()
+                        
                     }
                 }))
+               
                 self.present(alert, animated: true)
-                
             }
+                else{
+                    let alert2 = UIAlertController(title: "This is not LED device", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+                     alert2.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(alert2, animated: true)
+                }
+        }
             
         }
-       
+    
     }
   
-}
+}*/
