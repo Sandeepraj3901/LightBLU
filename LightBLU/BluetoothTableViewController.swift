@@ -12,10 +12,13 @@ import CoreBluetooth
 class BluetoothTableViewController: UITableViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     var name: String = " "
+    var NAME: String = "LIGHT BLU"
     let B_UUID =
-        CBUUID(string: "5A8ADD90-A33D-5803-C623-40517908D5EF")
+        CBUUID(string: "0000AB07-D102-11E1-9B23-00025B00A5A5")
+    
+    
     let BSERVICE_UUID =
-        CBUUID(string: "a495ff20-c5b1-4b44-b512-1370f02d74de")
+        CBUUID(string: "0000AB05-D102-11E1-9B23-00025B00A5A5")
     var perip = Array<CBPeripheral>()
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -91,8 +94,8 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
         print(cell.count)
         }*/
         //print(peripherals)
-        //print("Discovered: \(String(describing: peripheral.name)) at \(RSSI)")
-        //print("AdvertisementData:\(advertisementData)")
+        print("Discovered: \(String(describing: peripheral)) at \(RSSI)")
+        print("AdvertisementData:\(advertisementData)")
         if (peripherals != peripheral && peripheral.name != nil)
         {
             peripherals = peripheral
@@ -109,14 +112,23 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
        if(peripheral.name != nil)
        {
         name = peripheral.name!
-        if peripheral.name == "estimote"
+        if (peripheral.name == "LIGHT BLU")
         {
-            
-            print("Found:\(name)")
-            manager.connect(peripherals, options: nil)
+            let device = (advertisementData as NSDictionary).object(forKey: CBAdvertisementDataLocalNameKey)
+                as? NSString
+            print("hello:\(peripheral) and \(String(describing: device))")
+            if device?.contains(NAME) == true{
+            //self.manager.stopScan()
+            print("Found:\(name), and \(NAME)")
+            //manager.connect(peripherals, options: nil)
             print("23454556666")
-            self.manager.stopScan()
+                self.peripherals = peripheral
+                self.peripherals.delegate = self
+                manager.connect(peripherals, options: nil)
+                //print(peripherals)
+                self.manager.stopScan()
             
+            }
             self.peripherals = peripheral
             self.peripherals.delegate = self
            
@@ -128,23 +140,50 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
             
             
         }
+       }
+       else
+        {
+            print("no peripheral name")
         }
-    }
+}
+      
+        
     
-    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
-        peripheral.discoverServices(nil)
-        peripheral.delegate = self
-       
+    
+    
+//    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
+//        print("CONNECTED")
+//        peripheral.discoverServices(nil)
+//        peripheral.delegate = self
+//
+//
+//
+//
+//    }
+    // Called when it succeeded
+    func centralManager(_ central: CBCentralManager,
+                                 didConnect peripherals: CBPeripheral)
+    {
+        print(peripherals)
+        print("connected!")
+        peripherals.delegate = self
+        peripherals.discoverServices(nil)
+    
         
-        print("CONNECTED")
-        
+    }
+    // Called when it failed
+    func centralManager(_ central: CBCentralManager,
+                        didFailToConnect peripheral: CBPeripheral,
+                        error: Error?)
+    {
+        print("failed…")
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         for service in peripheral.services! {
             let thisService = service as CBService
             peripheral.discoverCharacteristics(nil, for: thisService)
-            
+            print("in service:\(thisService)")
             if service.uuid == BSERVICE_UUID {
              peripheral.discoverCharacteristics(nil, for: thisService)
              }
@@ -152,28 +191,62 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        print("in characteristics")
         for characteristic in service.characteristics! {
             let thisCharacteristic = characteristic as CBCharacteristic
             print(thisCharacteristic.uuid)
             if thisCharacteristic.uuid == B_UUID {
-                self.peripherals.setNotifyValue(true, for: thisCharacteristic)
+                //let ch = thisCharacteristic
+                print("found matching characteristic")
+                peripherals.setNotifyValue(true, for: thisCharacteristic)
+                 self.peripherals.delegate = self
+                if thisCharacteristic.properties.contains(.read) {
+                    print("\(thisCharacteristic.uuid): properties contains .read")
+                }
+                if thisCharacteristic.properties.contains(.notify) {
+                    print("\(thisCharacteristic.uuid): properties contains .notify")
+                }
+                if thisCharacteristic.properties.contains(.write) {
+                    print("\(thisCharacteristic.uuid): properties contains .write")
+                }
+                print(thisCharacteristic.value as Any)
+                peripherals.readValue(for: thisCharacteristic)
+                /// writting data to peripheral device
+                //let d = "FF0000"
+                let bytes : [UInt8] = [ 0xF, 0xF, 0x00, 0x00, 0x00, 0x00 ]
+                let data = Data(bytes:bytes)
+               //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                peripherals.writeValue(data, for: characteristic, type: CBCharacteristicWriteType.withoutResponse)
+                 peripherals.readValue(for: thisCharacteristic)
+                }
             }
         }
-    }
     
     
     
-    
-    func peripheral(_ peripheral: CBPeripheral,didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        var _:UInt32 = 0;
+     func peripheral(_ peripheral: CBPeripheral,didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+       
         if characteristic.uuid == B_UUID {
-            print(characteristic.value!)
-            //characteristic.value!.getBytes(&count, length: sizeof(UInt32))
-            //labelCount.text = NSString(format: "%llu", count) as String
+            //print("char value:\(characteristic.value!)")
+            if let error = error {
+                print("Failed… error: \(error)")
+                return
+            }
+
+            print("characteristic uuid: \(characteristic.uuid), value: \(String(describing: characteristic.value))")
+
+            }
         }
+    
+     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?)
+    {
+        if error != nil {
+            print("error: \(String(describing: error))")
+            return
+        }
+        
+        print("Succeeded!")
     }
-    
-    
     /*
      // MARK: - Navigation
      
