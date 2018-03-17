@@ -16,7 +16,7 @@ import AWSCognito
 class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
  
     
-    let dname: String = " welcome"
+    let dname: String = "welcome"
    //let DynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
     @IBOutlet weak var switchval: UISwitch!
     @IBOutlet weak var idval: UITextField!
@@ -33,8 +33,9 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
             super.viewDidLoad()
              self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
             pickUp(coloval)
-            readval()
+        
            createid()
+            readval()
         // Do any additional setup after loading the view.
     }
     
@@ -53,9 +54,9 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
         let dynamoDbObjectMapper = AWSDynamoDBObjectMapper.default()
         
         // Create data object using data models
-        let newsItem: Sample1 = Sample1()
+        let newsItem: Sample = Sample()
         
-        newsItem.userid = AWSIdentityManager.default().identityId!
+        newsItem.userid = "welcome"
             //AWSIdentityManager.default().identityId
 
         //Save a new item
@@ -74,7 +75,7 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
         
         // Create a record in a dataset and synchronize with the server
         let dataset = syncClient.openOrCreateDataset("myDataset")
-        dataset.setString(newsItem.userid, forKey:"IdValue")
+        dataset.setString("newsItem.userid as String!", forKey:"IdValue")
         print(" saved to cognito")
         dataset.synchronize().continueWith {(task: AWSTask!) -> AnyObject! in
             // Your handler code here
@@ -90,12 +91,13 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
         let dynamoDbObjectMapper = AWSDynamoDBObjectMapper.default()
         
         // Create data object using data models you downloaded from Mobile Hub
-        let newsItem: Sample1 = Sample1();
+        let newsItem: Sample = Sample();
         //newsItem._userid = AWSIdentityManager.default().identityId
         
-        dynamoDbObjectMapper.load(Sample1.self, hashKey: newsItem.userid, rangeKey: "userid",
+        dynamoDbObjectMapper.load(Sample.self, hashKey: newsItem.userid, rangeKey: "userid",
                   completionHandler: {
                 (objectModel: AWSDynamoDBObjectModel?, error: Error?) -> Void in
+                    print("Checking :\(newsItem.userid as String)")
                 if let error = error {
                     print("Amazon DynamoDB Read Error: \(error)")
                     return
@@ -107,8 +109,8 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
         
         // Create a record in a dataset and synchronize with the server
         let dataset = syncClient.openOrCreateDataset("myDataset2")
-        dataset.setString(newsItem.userid, forKey:"ReadValue")
-         print(" read to cognito")
+        dataset.setString("newsItem.userid as String!", forKey:"ReadValue")
+        print(" read to cognito: \(newsItem.userid)")
         dataset.synchronize().continueWith {(task: AWSTask!) -> AnyObject! in
             // Your handler code here
             return nil
@@ -174,6 +176,7 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
 
     /*

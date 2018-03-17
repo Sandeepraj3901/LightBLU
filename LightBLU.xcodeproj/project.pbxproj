@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		420F173E204A2A7E00077C89 /* BluetoothTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F173D204A2A7E00077C89 /* BluetoothTableViewController.swift */; };
 		42416414204F53E600CACFC6 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 42416413204F53E600CACFC6 /* awsconfiguration.json */; };
-		42416418204F576500CACFC6 /* Sample1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42416417204F576500CACFC6 /* Sample1.swift */; };
+		42416418204F576500CACFC6 /* Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42416417204F576500CACFC6 /* Sample.swift */; };
 		4241641A204F894400CACFC6 /* DeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42416419204F894400CACFC6 /* DeviceViewController.swift */; };
 		425B62D3204DFB0B00363BFF /* Bluetooth.png in Resources */ = {isa = PBXBuildFile; fileRef = 425B62CF204DFB0B00363BFF /* Bluetooth.png */; };
 		425B62D4204DFB0B00363BFF /* More.png in Resources */ = {isa = PBXBuildFile; fileRef = 425B62D0204DFB0B00363BFF /* More.png */; };
@@ -171,7 +171,7 @@
 /* Begin PBXFileReference section */
 		420F173D204A2A7E00077C89 /* BluetoothTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothTableViewController.swift; sourceTree = "<group>"; };
 		42416413204F53E600CACFC6 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = awsconfiguration.json; path = ../../../Downloads/awsconfiguration.json; sourceTree = "<group>"; };
-		42416417204F576500CACFC6 /* Sample1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sample1.swift; sourceTree = "<group>"; };
+		42416417204F576500CACFC6 /* Sample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sample.swift; sourceTree = "<group>"; };
 		42416419204F894400CACFC6 /* DeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewController.swift; sourceTree = "<group>"; };
 		425B62CF204DFB0B00363BFF /* Bluetooth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bluetooth.png; sourceTree = "<group>"; };
 		425B62D0204DFB0B00363BFF /* More.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = More.png; sourceTree = "<group>"; };
@@ -306,7 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				426C0980204A069B00249978 /* SampleDB.swift */,
-				42416417204F576500CACFC6 /* Sample1.swift */,
+				42416417204F576500CACFC6 /* Sample.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -614,7 +614,7 @@
 				4266CBAD203E5DAB00BC2438 /* ScheduleScreenViewController.swift in Sources */,
 				4266CBAF203E60F800BC2438 /* AppleScreenViewController.swift in Sources */,
 				4241641A204F894400CACFC6 /* DeviceViewController.swift in Sources */,
-				42416418204F576500CACFC6 /* Sample1.swift in Sources */,
+				42416418204F576500CACFC6 /* Sample.swift in Sources */,
 				4266CBA9203E5D8700BC2438 /* QRScanViewController.swift in Sources */,
 				4266CBA5203E4C0F00BC2438 /* BluetoothScreenViewController.swift in Sources */,
 				42CB099B203D0A1C0001EAFF /* MainCollectionViewCell.swift in Sources */,

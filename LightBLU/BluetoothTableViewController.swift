@@ -14,9 +14,10 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
     var name: String = " "
     var NAME: String = "LIGHT BLU"
     let B_UUID =
-        CBUUID(string: "0000AB07-D102-11E1-9B23-00025B00A5A5")
-    
-    
+        CBUUID(string: "0x1802")
+    //0000AB07-D102-11E1-9B23-00025B00A5A5
+    let Device = CBUUID(string: "0x1800")
+    let Devicec = CBUUID(string: "0x2A00")
     let BSERVICE_UUID =
         CBUUID(string: "0000AB05-D102-11E1-9B23-00025B00A5A5")
     var perip = Array<CBPeripheral>()
@@ -182,9 +183,10 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         for service in peripheral.services! {
             let thisService = service as CBService
-            peripheral.discoverCharacteristics(nil, for: thisService)
+            //peripheral.discoverCharacteristics(nil, for: thisService)
             print("in service:\(thisService)")
-            if service.uuid == BSERVICE_UUID {
+            if service.uuid == BSERVICE_UUID{
+            //if service.uuid == Device{
              peripheral.discoverCharacteristics(nil, for: thisService)
              }
         }
@@ -195,11 +197,12 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
         for characteristic in service.characteristics! {
             let thisCharacteristic = characteristic as CBCharacteristic
             print(thisCharacteristic.uuid)
-            if thisCharacteristic.uuid == B_UUID {
+            if thisCharacteristic.uuid == B_UUID{
+                //if thisCharacteristic.uuid == Devicec{
                 //let ch = thisCharacteristic
                 print("found matching characteristic")
-                peripherals.setNotifyValue(true, for: thisCharacteristic)
-                 self.peripherals.delegate = self
+                //peripherals.setNotifyValue(true, for: thisCharacteristic)
+                 //self.peripherals.delegate = self
                 if thisCharacteristic.properties.contains(.read) {
                     print("\(thisCharacteristic.uuid): properties contains .read")
                 }
@@ -209,15 +212,21 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
                 if thisCharacteristic.properties.contains(.write) {
                     print("\(thisCharacteristic.uuid): properties contains .write")
                 }
-                print(thisCharacteristic.value as Any)
-                peripherals.readValue(for: thisCharacteristic)
+               
+                //peripheral.readValue(for: thisCharacteristic)
+                peripheral.setNotifyValue(true, for: thisCharacteristic)
+                //thisCharacteristic.value = "tytyty"
+                 print(thisCharacteristic as Any)
                 /// writting data to peripheral device
                 //let d = "FF0000"
-                let bytes : [UInt8] = [ 0xF, 0xF, 0x00, 0x00, 0x00, 0x00 ]
-                let data = Data(bytes:bytes)
+               
+                var value: [UInt8] = [0x00, 0xFF, 0x00]
+                    let data = NSData(bytes: &value, length: value.count) as Data
+                let data1: Data = "000".data(using: String.Encoding.utf8)!
+                print(data1)
                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
-                peripherals.writeValue(data, for: characteristic, type: CBCharacteristicWriteType.withoutResponse)
-                 peripherals.readValue(for: thisCharacteristic)
+                    peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                 peripheral.readValue(for: thisCharacteristic)
                 }
             }
         }
@@ -226,7 +235,7 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
     
      func peripheral(_ peripheral: CBPeripheral,didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
        
-        if characteristic.uuid == B_UUID {
+       
             //print("char value:\(characteristic.value!)")
             if let error = error {
                 print("Failed… error: \(error)")
@@ -235,16 +244,16 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
 
             print("characteristic uuid: \(characteristic.uuid), value: \(String(describing: characteristic.value))")
 
-            }
+        
         }
     
      func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?)
     {
-        if error != nil {
+        if let error = error {
             print("error: \(String(describing: error))")
             return
         }
-        
+        print( characteristic)
         print("Succeeded!")
     }
     /*

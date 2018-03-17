@@ -13,9 +13,9 @@ import AWSAuthCore
 import AWSCore
 import AWSCognito
 
-class Sample1: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
+class Sample: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
-    var userid: String = ""
+    var userid: NSString = ""
     
     //var id2: String?
     static func dynamoDBTableName() -> String {
@@ -28,7 +28,6 @@ class Sample1: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         
         return "userid"
     }
-    
     
     
     
