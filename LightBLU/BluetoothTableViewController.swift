@@ -11,6 +11,7 @@ import CoreBluetooth
 
 class BluetoothTableViewController: UITableViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
     
+    @IBOutlet weak var sublabel: UILabel!
     var name: String = " "
     var NAME: String = "LIGHT BLU"
     let B_UUID =
@@ -21,6 +22,7 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
     let BSERVICE_UUID =
         CBUUID(string: "0000AB05-D102-11E1-9B23-00025B00A5A5")
     var perip = Array<CBPeripheral>()
+    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print(perip.count)
@@ -33,6 +35,7 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
         let peripheral1 = perip[indexPath.row]
         
                cells.textLabel?.text = peripheral1.name
+                cells.detailTextLabel?.text = "Connected"
         //print(cells)
         return cells
     }
@@ -61,14 +64,18 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         manager = CBCentralManager(delegate: self, queue: nil)
         // Do any additional setup after loading the view.
+        
     }
+    
  
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
    
     /* func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
@@ -115,6 +122,7 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
         name = peripheral.name!
         if (peripheral.name == "LIGHT BLU")
         {
+           //self.sublabel.text = "Connected"
             let device = (advertisementData as NSDictionary).object(forKey: CBAdvertisementDataLocalNameKey)
                 as? NSString
             print("hello:\(peripheral) and \(String(describing: device))")
@@ -255,6 +263,8 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
         }
         print( characteristic)
         print("Succeeded!")
+       
+        manager.cancelPeripheralConnection(peripheral)
     }
     /*
      // MARK: - Navigation
@@ -268,10 +278,19 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "TabletoDevice") {
+           
             let vc = segue.destination as! DeviceViewController
             vc.selectedName = name
         }
     }
-    
+//    public func setval(Data1: String, char: CBCharacteristic)
+//    {
+//        var value: [UInt8] = [0x00, 0xFF, 0x00]
+//        let data = NSData(bytes: &value, length: value.count) as Data
+//        let data1: Data = Data1.data(using: String.Encoding.utf8)!
+//        print(data1)
+//        //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+//        peripheral.writeValue(data, for: char, type: CBCharacteristicWriteType.withResponse)
+//    }
     
 }

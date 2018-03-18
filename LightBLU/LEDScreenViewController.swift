@@ -11,10 +11,24 @@ import AWSDynamoDB
 import AWSAuthCore
 import AWSCore
 import AWSCognito
+import CoreBluetooth
 
 
-class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
- 
+class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate,
+                            CBCentralManagerDelegate, CBPeripheralDelegate {
+   //let vc1 = DeviceViewController.self
+
+    var name: String = " "
+    var NAME: String = "LIGHT BLU"
+    let B_UUID =
+        CBUUID(string: "0x1802")
+    //0000AB07-D102-11E1-9B23-00025B00A5A5
+    let Device = CBUUID(string: "0x1800")
+    let Devicec = CBUUID(string: "0x2A00")
+    let BSERVICE_UUID =
+        CBUUID(string: "0000AB05-D102-11E1-9B23-00025B00A5A5")
+        
+        
     
     let dname: String = "welcome"
    //let DynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
@@ -24,11 +38,12 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
     @IBOutlet weak var coloval: UITextField!
     @IBOutlet var colorval: UIView!
     @IBOutlet var intensityval: UIView!
-    let cval = ["Yellow", "Red", "Blue","Green","White","Orange","Black"]
+    let cval = ["Red", "Blue","Green", "White"]
     
      var pickerView = UIPickerView()
     override func viewDidLoad() {
         
+       
             self.navigationItem.title = "LED SCREEN";
             super.viewDidLoad()
              self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
@@ -36,9 +51,34 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
         
            createid()
             readval()
+       
         // Do any additional setup after loading the view.
     }
     
+    
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        
+        if central.state == CBManagerState.poweredOn {
+            central.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : false])
+            let alertController = UIAlertController(title: "Alert", message:
+                "Bluetooth is ON.", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+            
+            //self.present(alertController, animated: true, completion: nil)
+        } else {
+            
+            print("Bluetooth not available.")
+            let alertController = UIAlertController(title: "Alert", message:
+                "Bluetooth is Off.", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    var manager:CBCentralManager!
+    var peripherals:CBPeripheral!
+    var peripheral:CBPeripheral!
     
     public func createid() {
 //        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast2,
@@ -83,6 +123,218 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
             
         }
 }
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        
+        /*if(cell.contains(String(describing: peripheral.identifier.uuid)) == false && cell.count < 15)
+         {
+         cell.append(String(describing: peripheral.identifier.uuidString))
+         
+         print("welcome:\(cell)")
+         print(cell.count)
+         }*/
+        //print(peripherals)
+        print("Discovered: \(String(describing: peripheral)) at \(RSSI)")
+        print("AdvertisementData:\(advertisementData)")
+        if (peripherals != peripheral && peripheral.name != nil)
+        {
+            peripherals = peripheral
+            print(peripherals)
+            //perip.append(peripherals)
+        }
+       // self.tableView.reloadData()
+        /* let device = (advertisementData as NSDictionary).object(forKey: CBAdvertisementDataLocalNameKey )
+         as? NSString
+         print(String(describing: device))
+         //CBAdvertisementDataLocalNameKey
+         
+         */
+        if(peripheral.name != nil)
+        {
+            name = peripheral.name!
+            if (peripheral.name == "LIGHT BLU")
+            {
+                //self.sublabel.text = "Connected"
+                let device = (advertisementData as NSDictionary).object(forKey: CBAdvertisementDataLocalNameKey)
+                    as? NSString
+                print("hello:\(peripheral) and \(String(describing: device))")
+                if device?.contains(NAME) == true{
+                    //self.manager.stopScan()
+                    print("Found:\(name), and \(NAME)")
+                    //manager.connect(peripherals, options: nil)
+                    print("23454556666")
+                    self.peripherals = peripheral
+                    self.peripherals.delegate = self
+                    manager.connect(peripherals, options: nil)
+                    //print(peripherals)
+                    self.manager.stopScan()
+                    
+                }
+                self.peripherals = peripheral
+                self.peripherals.delegate = self
+                
+            }
+            else
+            {
+                print("no device found")
+                //self.manager.stopScan()
+                
+                
+            }
+        }
+        else
+        {
+            print("no peripheral name")
+        }
+    }
+    
+    
+    
+    
+    
+    //    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
+    //        print("CONNECTED")
+    //        peripheral.discoverServices(nil)
+    //        peripheral.delegate = self
+    //
+    //
+    //
+    //
+    //    }
+    // Called when it succeeded
+    func centralManager(_ central: CBCentralManager,
+                        didConnect peripherals: CBPeripheral)
+    {
+        print(peripherals)
+        print("connected!")
+        peripherals.delegate = self
+        peripherals.discoverServices(nil)
+        
+        
+    }
+    // Called when it failed
+    func centralManager(_ central: CBCentralManager,
+                        didFailToConnect peripheral: CBPeripheral,
+                        error: Error?)
+    {
+        print("failed…")
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        for service in peripheral.services! {
+            
+            let thisService = service as CBService
+            //peripheral.discoverCharacteristics(nil, for: thisService)
+            print("in service:\(thisService)")
+            if service.uuid == BSERVICE_UUID{
+                //if service.uuid == Device{
+                peripheral.discoverCharacteristics(nil, for: thisService)
+            }
+        }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        print("in characteristics")
+        for characteristic in service.characteristics! {
+            let thisCharacteristic = characteristic as CBCharacteristic
+            print(thisCharacteristic.uuid)
+            if thisCharacteristic.uuid == B_UUID{
+                //if thisCharacteristic.uuid == Devicec{
+                //let ch = thisCharacteristic
+                print("found matching characteristic")
+                peripherals.setNotifyValue(true, for: thisCharacteristic)
+                //self.peripherals.delegate = self
+                if thisCharacteristic.properties.contains(.read) {
+                    print("\(thisCharacteristic.uuid): properties contains .read")
+                }
+                if thisCharacteristic.properties.contains(.notify) {
+                    print("\(thisCharacteristic.uuid): properties contains .notify")
+                }
+                if thisCharacteristic.properties.contains(.write) {
+                    print("\(thisCharacteristic.uuid): properties contains .write")
+                }
+                
+                //peripheral.readValue(for: thisCharacteristic)
+                //peripheral.setNotifyValue(true, for: thisCharacteristic)
+                //thisCharacteristic.value = "tytyty"
+                print(thisCharacteristic as Any)
+                /// writting data to peripheral device
+                //let d = "FF0000"
+                if(idval.text != nil)
+                {
+                    if(switchval.isOn)
+                    {
+                        if(coloval.text != nil)
+                        {
+                            switch(coloval?.text)
+                            {
+                            case "Red"?: var value: [UInt8] = [0xFF, 0x00, 0x00]
+                                        let data = NSData(bytes: &value, length: value.count) as Data
+                            //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                        peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                        peripheral.readValue(for: thisCharacteristic)
+                                        break
+                                
+                            case "Blue"?: var value: [UInt8] = [0x00, 0x00, 0xFF]
+                                            let data = NSData(bytes: &value, length: value.count) as Data
+                            //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                            peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                            peripheral.readValue(for: thisCharacteristic)
+                            
+                                            break
+                            case "Green"?: var value: [UInt8] = [0x00, 0xFF, 0x00]
+                                            let data = NSData(bytes: &value, length: value.count) as Data
+                                            //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                            peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                            peripheral.readValue(for: thisCharacteristic)
+                            
+                                            break
+                            case "White"?: var value: [UInt8] = [0xFF, 0xFF, 0xFF]
+                                            let data = NSData(bytes: &value, length: value.count) as Data
+                                            //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                            peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                            peripheral.readValue(for: thisCharacteristic)
+                            
+                                break
+                                
+                            case .none: break
+                                
+                            case .some(_): break
+                                
+                            }
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+    
+    
+    
+    func peripheral(_ peripheral: CBPeripheral,didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        
+        
+        //print("char value:\(characteristic.value!)")
+        if let error = error {
+            print("Failed… error: \(error)")
+            return
+        }
+        
+        print("characteristic uuid: \(characteristic.uuid), value: \(String(describing: characteristic.value))")
+        
+        
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?)
+    {
+        if let error = error {
+            print("error: \(String(describing: error))")
+            return
+        }
+        print( characteristic)
+        print("Succeeded!")
+        manager.cancelPeripheralConnection(peripheral)
+    }
     func readval() {
        
         
@@ -188,5 +440,37 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
         // Pass the selected object to the new view controller.
     }
     */
-
+    @IBAction func saveBtn(_ sender: Any) {
+        let id = idval.text
+        
+        if((id?.isEmpty)!)
+        {
+            let alertController = UIAlertController(title: "Alert", message:
+                "Please enter ID ", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+        }
+        else if(switchval.isOn)
+        {      let id = coloval.text
+                if((id?.isEmpty)!)
+                {
+                    let alertController = UIAlertController(title: "Alert", message:
+                        "Please Select Color.", preferredStyle: UIAlertControllerStyle.alert)
+                    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                }
+                else
+                {
+                      manager = CBCentralManager(delegate: self, queue: nil)
+                }
+        }
+        else
+        {let alertController = UIAlertController(title: "Alert", message:
+                "Please On the Switch.", preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+                self.present(alertController, animated: true, completion: nil)}
+        }
+    
+   
 }

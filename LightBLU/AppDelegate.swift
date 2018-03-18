@@ -9,6 +9,7 @@
 import UIKit
 import AWSMobileClient
 import AWSCore
+import CoreBluetooth
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let configuration = AWSServiceConfiguration(region:.USEast2, credentialsProvider:credentialsProvider)
         
         AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
+       
         AWSDDLog.add(AWSDDTTYLogger.sharedInstance)
         AWSDDLog.sharedInstance.logLevel = .info
         return AWSMobileClient.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
