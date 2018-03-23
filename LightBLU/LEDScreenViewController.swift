@@ -28,13 +28,19 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
     let BSERVICE_UUID =
         CBUUID(string: "0000AB05-D102-11E1-9B23-00025B00A5A5")
         
-        
+    var sliderval = 0
     
     let dname: String = "welcome"
    //let DynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
     @IBOutlet weak var switchval: UISwitch!
     @IBOutlet weak var idval: UITextField!
     
+    @IBAction func Slideraction(_ sender: UISlider){
+        sender.maximumValue = 100.0
+        sender.minimumValue = 0.0
+        sliderval = Int(sender.value)
+        print(sliderval)
+    }
     @IBOutlet weak var coloval: UITextField!
     @IBOutlet var colorval: UIView!
     @IBOutlet var intensityval: UIView!
@@ -47,6 +53,8 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
             self.navigationItem.title = "LED SCREEN";
             super.viewDidLoad()
              self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
+            idval.text = "LIGHT BLU "
+            //print("hlsajhljrhfasfg:\(vc.name)")
             pickUp(coloval)
         
            createid()
@@ -151,6 +159,7 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
         if(peripheral.name != nil)
         {
             name = peripheral.name!
+             idval?.text = name
             if (peripheral.name == "LIGHT BLU")
             {
                 //self.sublabel.text = "Connected"
@@ -267,7 +276,10 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
                         {
                             switch(coloval?.text)
                             {
-                            case "Red"?: var value: [UInt8] = [0xFF, 0x00, 0x00]
+                               
+                            case "Red"?:  
+                                        
+                                        var value: [UInt8] = [0xFF, 0x00, 0x00]
                                         let data = NSData(bytes: &value, length: value.count) as Data
                             //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
                                         peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
@@ -445,10 +457,11 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
         
         if((id?.isEmpty)!)
         {
-            let alertController = UIAlertController(title: "Alert", message:
-                "Please enter ID ", preferredStyle: UIAlertControllerStyle.alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
-            self.present(alertController, animated: true, completion: nil)
+//            let alertController = UIAlertController(title: "Alert", message:
+//                "Please enter ID ", preferredStyle: UIAlertControllerStyle.alert)
+//            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+//            self.present(alertController, animated: true, completion: nil)
+           
         }
         else if(switchval.isOn)
         {      let id = coloval.text
@@ -460,6 +473,7 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
                     self.present(alertController, animated: true, completion: nil)
                     
                 }
+              
                 else
                 {
                       manager = CBCentralManager(delegate: self, queue: nil)

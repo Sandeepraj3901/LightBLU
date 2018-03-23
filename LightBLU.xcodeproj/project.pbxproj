@@ -24,6 +24,8 @@
 		4266CBAD203E5DAB00BC2438 /* ScheduleScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4266CBAC203E5DAB00BC2438 /* ScheduleScreenViewController.swift */; };
 		4266CBAF203E60F800BC2438 /* AppleScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4266CBAE203E60F800BC2438 /* AppleScreenViewController.swift */; };
 		426C0981204A069B00249978 /* SampleDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426C0980204A069B00249978 /* SampleDB.swift */; };
+		42CABA6220621ED400C78419 /* Autumn-Wallpapers-HD12_8eDeTkZ.png in Resources */ = {isa = PBXBuildFile; fileRef = 42CABA6120621ED400C78419 /* Autumn-Wallpapers-HD12_8eDeTkZ.png */; };
+		42CABA6420621FE500C78419 /* Christmas-Lights-Backgrounds.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 42CABA6320621FE500C78419 /* Christmas-Lights-Backgrounds.jpg */; };
 		42CB0961203CC2DF0001EAFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CB0960203CC2DF0001EAFF /* AppDelegate.swift */; };
 		42CB0966203CC2DF0001EAFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42CB0964203CC2DF0001EAFF /* Main.storyboard */; };
 		42CB0968203CC2DF0001EAFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42CB0967203CC2DF0001EAFF /* Assets.xcassets */; };
@@ -186,6 +188,8 @@
 		4266CBAC203E5DAB00BC2438 /* ScheduleScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleScreenViewController.swift; sourceTree = "<group>"; };
 		4266CBAE203E60F800BC2438 /* AppleScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleScreenViewController.swift; sourceTree = "<group>"; };
 		426C0980204A069B00249978 /* SampleDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleDB.swift; sourceTree = "<group>"; };
+		42CABA6120621ED400C78419 /* Autumn-Wallpapers-HD12_8eDeTkZ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Autumn-Wallpapers-HD12_8eDeTkZ.png"; sourceTree = "<group>"; };
+		42CABA6320621FE500C78419 /* Christmas-Lights-Backgrounds.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Christmas-Lights-Backgrounds.jpg"; sourceTree = "<group>"; };
 		42CB095D203CC2DF0001EAFF /* LightBLU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightBLU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42CB0960203CC2DF0001EAFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42CB0965203CC2DF0001EAFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -353,6 +357,7 @@
 				42CB0964203CC2DF0001EAFF /* Main.storyboard */,
 				42CB0967203CC2DF0001EAFF /* Assets.xcassets */,
 				42CB0969203CC2DF0001EAFF /* LaunchScreen.storyboard */,
+				42CABA6120621ED400C78419 /* Autumn-Wallpapers-HD12_8eDeTkZ.png */,
 				42CB096C203CC2DF0001EAFF /* Info.plist */,
 				42416413204F53E600CACFC6 /* awsconfiguration.json */,
 				4266CBAE203E60F800BC2438 /* AppleScreenViewController.swift */,
@@ -386,6 +391,7 @@
 		42D9AA52204DF0B70036BC41 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				42CABA6320621FE500C78419 /* Christmas-Lights-Backgrounds.jpg */,
 				425B62DF204E00AE00363BFF /* bg.png */,
 				425B62D1204DFB0B00363BFF /* Alarm.png */,
 				425B62D2204DFB0B00363BFF /* Barcode.png */,
@@ -559,11 +565,13 @@
 				42CB096B203CC2DF0001EAFF /* LaunchScreen.storyboard in Resources */,
 				425B62D3204DFB0B00363BFF /* Bluetooth.png in Resources */,
 				42CB0999203D04470001EAFF /* 1.jpg in Resources */,
+				42CABA6220621ED400C78419 /* Autumn-Wallpapers-HD12_8eDeTkZ.png in Resources */,
 				42D9AA54204DF0D50036BC41 /* LED.png in Resources */,
 				42CB0968203CC2DF0001EAFF /* Assets.xcassets in Resources */,
 				42416414204F53E600CACFC6 /* awsconfiguration.json in Resources */,
 				425B62D4204DFB0B00363BFF /* More.png in Resources */,
 				425B62E0204E00AE00363BFF /* bg.png in Resources */,
+				42CABA6420621FE500C78419 /* Christmas-Lights-Backgrounds.jpg in Resources */,
 				42CB0966203CC2DF0001EAFF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

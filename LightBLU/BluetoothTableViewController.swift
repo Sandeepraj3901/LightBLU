@@ -35,7 +35,15 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
         let peripheral1 = perip[indexPath.row]
         
                cells.textLabel?.text = peripheral1.name
-                cells.detailTextLabel?.text = "Connected"
+                if(peripheral1.name == "LIGHT BLU")
+                {
+                    cells.detailTextLabel?.text = "Connected"}
+                else
+                {
+                    cells.detailTextLabel?.text = "Not Connected"
+                }
+        
+        
         //print(cells)
         return cells
     }
@@ -228,7 +236,7 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
                 /// writting data to peripheral device
                 //let d = "FF0000"
                
-                var value: [UInt8] = [0x00, 0xFF, 0x00]
+                var value: [UInt8] = [0x00,0x00,0xFF]
                     let data = NSData(bytes: &value, length: value.count) as Data
                 let data1: Data = "000".data(using: String.Encoding.utf8)!
                 print(data1)
