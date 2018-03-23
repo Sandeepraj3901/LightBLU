@@ -123,6 +123,7 @@ class QRScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         
     }
     
+    
     func launchApp(decodedURL: String) {
         
         if presentedViewController != nil {

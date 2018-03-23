@@ -15,7 +15,7 @@ import CoreBluetooth
 
 
 class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate,
-                            CBCentralManagerDelegate, CBPeripheralDelegate {
+                            CBCentralManagerDelegate, CBPeripheralDelegate, UITextFieldDelegate {
    //let vc1 = DeviceViewController.self
 
     var name: String = " "
@@ -37,8 +37,10 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
     
     @IBAction func Slideraction(_ sender: UISlider){
         sender.maximumValue = 100.0
-        sender.minimumValue = 0.0
+        sender.minimumValue = 55.0
         sliderval = Int(sender.value)
+        //var st = String(format:"%2X", sliderval)
+    
         print(sliderval)
     }
     @IBOutlet weak var coloval: UITextField!
@@ -52,7 +54,11 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
        
             self.navigationItem.title = "LED SCREEN";
             super.viewDidLoad()
-             self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
+//        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+//        backgroundImage.image = UIImage(named: "123.jpg")
+//        backgroundImage.contentMode = UIViewContentMode.scaleAspectFill
+//        self.view.insertSubview(backgroundImage, at: 0)
+             //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "123.jpg")!)
             idval.text = "LIGHT BLU "
             //print("hlsajhljrhfasfg:\(vc.name)")
             pickUp(coloval)
@@ -278,7 +284,7 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
                             {
                                
                             case "Red"?:  
-                                        
+                                        var st = String(format:"%2X", 100)
                                         var value: [UInt8] = [0xFF, 0x00, 0x00]
                                         let data = NSData(bytes: &value, length: value.count) as Data
                             //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
@@ -422,7 +428,11 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
         textField.inputAccessoryView = toolBar
         
     }
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        idval.resignFirstResponder()
+        return true
+    }
+
     
     @objc  public func doneClick() {
         coloval.resignFirstResponder()

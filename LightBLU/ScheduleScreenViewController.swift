@@ -9,8 +9,12 @@
 import UIKit
 
 class ScheduleScreenViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate,UITextFieldDelegate{
+ 
     
-    
+    @IBAction func SliderActn(_ sender: UISlider) {
+        
+        print(sender.value)
+    }
     @IBAction func savebtn(_ sender: Any) {
         
         print("saved")
@@ -35,7 +39,7 @@ class ScheduleScreenViewController: UIViewController, UIPickerViewDataSource, UI
     override func viewDidLoad() {
         self.navigationItem.title = "Scheduler";
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
+        //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
              pickUp(colortextfield)
         showDatePicker()
         
@@ -128,5 +132,10 @@ class ScheduleScreenViewController: UIViewController, UIPickerViewDataSource, UI
     @objc func cancelDatePicker(){
         self.view.endEditing(true)
     }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        Idtextfield.resignFirstResponder()
+        return true
+    }
+
 }
 
