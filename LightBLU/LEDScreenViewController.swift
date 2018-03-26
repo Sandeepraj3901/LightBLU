@@ -54,6 +54,15 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
        
             self.navigationItem.title = "LED SCREEN";
             super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "lb5")!)
+//        let backgroundImageView = UIImageView(image: UIImage(named: "lb5"))
+//        backgroundImageView.frame = view.frame
+//        backgroundImageView.contentMode = .scaleAspectFill
+//        view.addSubview(backgroundImageView)
+//        view.sendSubview(toBack: backgroundImageView)
+        
+        
 //        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
 //        backgroundImage.image = UIImage(named: "123.jpg")
 //        backgroundImage.contentMode = UIViewContentMode.scaleAspectFill

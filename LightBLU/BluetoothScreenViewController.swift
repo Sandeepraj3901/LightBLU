@@ -62,6 +62,8 @@ class BluetoothScreenViewController: UIViewController, CBCentralManagerDelegate,
         super.viewDidLoad()
         manager = CBCentralManager(delegate: self, queue: nil)
         // Do any additional setup after loading the view.
+        
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "lb5")!)
     }
 
     override func didReceiveMemoryWarning() {

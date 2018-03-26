@@ -12,8 +12,15 @@ class LaunchViewController: UIViewController {
       
     override func viewDidLoad() {
         super.viewDidLoad()
-         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "llb.jpg")!)
+         //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "lb5")!)
 
+        let backgroundImageView = UIImageView(image: UIImage(named: "lb5"))
+        backgroundImageView.frame = view.frame
+        backgroundImageView.contentMode = .scaleAspectFill
+        view.addSubview(backgroundImageView)
+        view.sendSubview(toBack: backgroundImageView)
+        
+        
         // Do any additional setup after loading the view.
     }
    
