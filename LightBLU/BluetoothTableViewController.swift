@@ -13,10 +13,10 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
     
     @IBOutlet weak var sublabel: UILabel!
     var name: String = " "
-    var NAME: String = "LIGHT BLU"
+    var NAME: String = "LED BLU"
     let B_UUID =
-        CBUUID(string: "0x1802")
-    //0000AB07-D102-11E1-9B23-00025B00A5A5
+        CBUUID(string: "0000AB07-D102-11E1-9B23-00025B00A5A5")
+    //0000AB07-D102-11E1-9B23-00025B00A5A5--0x1802
     let Device = CBUUID(string: "0x1800")
     let Devicec = CBUUID(string: "0x2A00")
     let BSERVICE_UUID =
@@ -35,7 +35,7 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
         let peripheral1 = perip[indexPath.row]
         
                cells.textLabel?.text = peripheral1.name
-                if(peripheral1.name == "LIGHT BLU")
+                if(peripheral1.name == "LED BLU")
                 {
                     cells.detailTextLabel?.text = "Connected"}
                 else
@@ -128,7 +128,7 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
        if(peripheral.name != nil)
        {
         name = peripheral.name!
-        if (peripheral.name == "LIGHT BLU")
+        if (peripheral.name == "LED BLU")
         {
            //self.sublabel.text = "Connected"
             let device = (advertisementData as NSDictionary).object(forKey: CBAdvertisementDataLocalNameKey)
@@ -236,7 +236,7 @@ class BluetoothTableViewController: UITableViewController, CBCentralManagerDeleg
                 /// writting data to peripheral device
                 //let d = "FF0000"
                
-                var value: [UInt8] = [0x00,0x00,0xFF]
+                var value: [UInt8] = [0x00,0x00,0x77]
                     let data = NSData(bytes: &value, length: value.count) as Data
                 let data1: Data = "000".data(using: String.Encoding.utf8)!
                 print(data1)

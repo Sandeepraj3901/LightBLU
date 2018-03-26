@@ -7,18 +7,14 @@
 //
 
 import UIKit
+import UserNotifications
 
 class ScheduleScreenViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate,UITextFieldDelegate{
- 
-    
-    @IBAction func SliderActn(_ sender: UISlider) {
-        
-        print(sender.value)
-    }
-    @IBAction func savebtn(_ sender: Any) {
-        
-        print("saved")
-    }
+    let colorval = ["Yellow", "Red", "Blue","Green","White","Orange","Black"]
+    var pickerView = UIPickerView()
+    let datePicker = UIDatePicker()
+    var datee = DateComponents()
+   
     @IBOutlet weak var schedulertitle: UINavigationBar!
     @IBOutlet weak var alarmtextfield: UITextField!
     @IBOutlet weak var intensitytextfield: UITextField!
@@ -35,9 +31,7 @@ class ScheduleScreenViewController: UIViewController, UIPickerViewDataSource, UI
   
     
     
-    let colorval = ["Yellow", "Red", "Blue","Green","White","Orange","Black"]
-    var pickerView = UIPickerView()
-    let datePicker = UIDatePicker()
+   
     override func viewDidLoad() {
         self.navigationItem.title = "Scheduler";
         super.viewDidLoad()
@@ -51,7 +45,9 @@ class ScheduleScreenViewController: UIViewController, UIPickerViewDataSource, UI
 //        view.sendSubview(toBack: backgroundImageView)
         
       
-        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler:{ didAllow , error in
+            
+        })
         //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
              pickUp(colortextfield)
         showDatePicker()
@@ -118,7 +114,8 @@ class ScheduleScreenViewController: UIViewController, UIPickerViewDataSource, UI
     
     func showDatePicker(){
         //Formate Date
-        datePicker.datePickerMode = .date
+        datePicker.datePickerMode = .dateAndTime
+        
         
         //ToolBar
         let toolbar = UIToolbar();
@@ -137,7 +134,9 @@ class ScheduleScreenViewController: UIViewController, UIPickerViewDataSource, UI
     @objc func donedatePicker(){
         
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
+        formatter.dateFormat = "dd/MM/yyyy HH:mm"
+        //formatter.timeStyle = DateFormatter.Style.short
+        
         alarmtextfield.text = formatter.string(from: datePicker.date)
         self.view.endEditing(true)
     }
@@ -149,6 +148,45 @@ class ScheduleScreenViewController: UIViewController, UIPickerViewDataSource, UI
         Idtextfield.resignFirstResponder()
         return true
     }
-
+    @objc func sendcolor (_ sender: Any)
+    {
+        print(" Time triggered")
+    }
+    
+    
+    @IBAction func SliderActn(_ sender: UISlider) {
+        
+        print(sender.value)
+    }
+    @IBAction func savebtn(_ sender: Any) {
+        
+        print("saved")
+        let triggerDaily = Calendar.current.dateComponents([.day,.month,.year,.hour,.minute,], from: datePicker.date)
+        
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: false)
+        
+        let alarmId = UUID().uuidString
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Notification"
+        content.body = " Your Request to turn light ON is completed"
+        //content.sound = UNNotificationSound.init(named: "your sound filename.mp3")
+        content.categoryIdentifier = alarmId
+        
+        let request = UNNotificationRequest(identifier: "alarmIdentifier", content: content, trigger: trigger)
+        
+        //print("alarm identi   : \(alarmIdentifier)")
+        
+        UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
+        UNUserNotificationCenter.current().add(request) {(error) in
+            
+            if let error = error {
+                print("Uh oh! i had an error: \(error)")
+            }
+        }
+        let timer = Timer(fireAt: datePicker.date, interval: 0, target: self, selector: #selector(self.sendcolor), userInfo: nil, repeats: false)
+        RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
+    }
 }
 
