@@ -469,7 +469,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Intensity:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9GR-Uu-7O8">
-                                <rect key="frame" x="7" y="389" width="70" height="21"/>
+                                <rect key="frame" x="7" y="331" width="70" height="21"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
@@ -494,11 +494,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <outlet property="delegate" destination="ONF-Wd-LMh" id="pL4-fA-bSm"/>
+                                    <outlet property="delegate" destination="ONF-Wd-LMh" id="rf5-7b-Gjz"/>
                                 </connections>
                             </textField>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="fuw-Bh-Pop">
-                                <rect key="frame" x="155" y="385" width="222" height="30"/>
+                                <rect key="frame" x="155" y="327" width="222" height="30"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <color key="minimumTrackTintColor" red="0.85545802116394043" green="0.90968352556228638" blue="0.44613838195800781" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="maximumTrackTintColor" red="0.3939576206" green="0.4818403657" blue="0.41928339190000002" alpha="0.25256614960000001" colorSpace="custom" customColorSpace="displayP3"/>
@@ -518,6 +518,23 @@
                                     <outlet property="delegate" destination="ONF-Wd-LMh" id="aaR-Hf-Phl"/>
                                 </connections>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Alarm:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhG-67-eIB">
+                                <rect key="frame" x="7" y="395" width="50" height="21"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vYn-oA-rE6">
+                                <rect key="frame" x="171" y="392" width="204" height="30"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <color key="backgroundColor" red="0.3939576206" green="0.4818403657" blue="0.41928339190000002" alpha="0.25256614960000001" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vaq-Dn-GTV" id="Mti-44-EqJ"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.090694956481456757" green="0.32998991012573242" blue="0.37870821356773376" alpha="0.67032320209999996" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="idd-Fe-Yr0"/>
@@ -532,6 +549,7 @@
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="alarmtxtfield" destination="vYn-oA-rE6" id="mB5-Dh-hGj"/>
                         <outlet property="colorval" destination="HHL-SV-57C" id="ZSh-Ut-IFD"/>
                         <outlet property="coloval" destination="Rcu-53-RwQ" id="vgX-Xd-V5X"/>
                         <outlet property="idval" destination="69p-bn-bx0" id="T5L-vr-5fY"/>
@@ -541,7 +559,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cjE-jI-ad4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1092" y="-1048"/>
+            <point key="canvasLocation" x="1092" y="-1048.4257871064469"/>
         </scene>
         <!--QRScan-->
         <scene sceneID="2qo-jP-8KN">

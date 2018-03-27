@@ -12,12 +12,14 @@ import AWSAuthCore
 import AWSCore
 import AWSCognito
 import CoreBluetooth
+import UserNotifications
 
 
 class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate,
                             CBCentralManagerDelegate, CBPeripheralDelegate, UITextFieldDelegate {
    //let vc1 = DeviceViewController.self
-
+ let datePicker = UIDatePicker()
+    @IBOutlet weak var alarmtxtfield: UITextField!
     var name: String = " "
     var NAME: String = "LED BLU"
     let B_UUID =
@@ -54,7 +56,9 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
        
             self.navigationItem.title = "LED SCREEN";
             super.viewDidLoad()
-        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler:{ didAllow , error in
+            
+        })
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "lb5")!)
 //        let backgroundImageView = UIImageView(image: UIImage(named: "lb5"))
 //        backgroundImageView.frame = view.frame
@@ -71,7 +75,7 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
             idval.text = "LED BLU "
             //print("hlsajhljrhfasfg:\(vc.name)")
             pickUp(coloval)
-        
+         showDatePicker()
            createid()
             readval()
        
@@ -287,11 +291,11 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
                 {
                     if(switchval.isOn)
                     {
-                        if(coloval.text != nil)
+                        if(coloval.text != nil && alarmtxtfield.text == "")
                         {
                             switch(coloval?.text)
                             {
-                               
+
                             case "Red"?:   if(self.sliderval >= 95) {
                                        // var st = String(format:"%2X", 100)
                                         var value: [UInt8] = [0xFF, 0x00, 0x00]
@@ -357,6 +361,312 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
                                 peripheral.readValue(for: thisCharacteristic)
                                 break
                                 }
+                            else if(self.sliderval <= 10 ) {
+                                var value: [UInt8] = [0x05, 0x00, 0x00]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                                }
+
+                            case "Blue"?:  if(self.sliderval >= 95) {
+                                // var st = String(format:"%2X", 100)
+                                var value: [UInt8] = [0x00,0xFF, 0x00]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 85 && self.sliderval < 95){
+                                var value: [UInt8] = [ 0x00,0xE5, 0x00]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 75 && self.sliderval < 85){
+                                var value: [UInt8] = [ 0x00,0xCF, 0x00]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 65 && self.sliderval < 75){
+                                var value: [UInt8] = [ 0x00,0xB9, 0x00]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 55 && self.sliderval < 65){
+                                var value: [UInt8] = [ 0x00,0x9F, 0x00]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 45 && self.sliderval < 55){
+                                var value: [UInt8] = [ 0x00,0x7F, 0x00]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 35 && self.sliderval < 45){
+                                var value: [UInt8] = [ 0x00,0x50, 0x00]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 15 && self.sliderval < 35){
+                                var value: [UInt8] = [ 0x00,0x2B, 0x00]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval <= 10 ) {
+                                var value: [UInt8] = [ 0x00, 0x05,0x00]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                                }
+                            case "Green"?:  if(self.sliderval >= 95) {
+                                // var st = String(format:"%2X", 100)
+                                var value: [UInt8] = [ 0x00, 0x00,0xFF]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 85 && self.sliderval < 95){
+                                var value: [UInt8] = [ 0x00, 0x00, 0xE5]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 75 && self.sliderval < 85){
+                                var value: [UInt8] = [0x00, 0x00, 0xCF]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 65 && self.sliderval < 75){
+                                var value: [UInt8] = [ 0x00, 0x00, 0xB9]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 55 && self.sliderval < 65){
+                                var value: [UInt8] = [ 0x00, 0x00, 0x9F]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 45 && self.sliderval < 55){
+                                var value: [UInt8] = [0x00, 0x00,0x7F]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 35 && self.sliderval < 45){
+                                var value: [UInt8] = [0x00, 0x00,0x50]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 15 && self.sliderval < 35){
+                                var value: [UInt8] = [0x00, 0x00, 0x2B]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval <= 10 ) {
+                                var value: [UInt8] = [0x00, 0x00, 0x05]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                                }
+                            case "White"?:  if(self.sliderval >= 95) {
+                                // var st = String(format:"%2X", 100)
+                                var value: [UInt8] = [0xFF, 0xFF, 0xFF]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 85 && self.sliderval < 95){
+                                var value: [UInt8] = [0xE5, 0xE5, 0xE5]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 75 && self.sliderval < 85){
+                                var value: [UInt8] = [0xCF, 0xCF, 0xCF]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 65 && self.sliderval < 75){
+                                var value: [UInt8] = [0xB9, 0xB9, 0xB9]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 55 && self.sliderval < 65){
+                                var value: [UInt8] = [0x9F, 0x9F, 0x9F]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 45 && self.sliderval < 55){
+                                var value: [UInt8] = [0x7F, 0x7F, 0x7F]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 35 && self.sliderval < 45){
+                                var value: [UInt8] = [0x50, 0x50, 0x50]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 15 && self.sliderval < 35){
+                                var value: [UInt8] = [0x2B, 0x2B, 0x2B]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval <= 10 ) {
+                                var value: [UInt8] = [0x05, 0x05, 0x05]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                                }
+
+                            case .none: break
+
+                            case .some(_): break
+
+                            }
+                        }
+                        else
+                        {
+                            print (" In schedule section: \(String(describing: alarmtxtfield.text!))")
+                            switch(coloval?.text)
+                            {
+                                
+                            case "Red"?:   if(self.sliderval >= 95) {
+                                // var st = String(format:"%2X", 100)
+                                var value: [UInt8] = [0xFF, 0x00, 0x00]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 85 && self.sliderval < 95){
+                                var value: [UInt8] = [0xE5, 0x00, 0x00]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 75 && self.sliderval < 85){
+                                var value: [UInt8] = [0xCF, 0x00, 0x00]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 65 && self.sliderval < 75){
+                                var value: [UInt8] = [0xB9, 0x00, 0x00]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 55 && self.sliderval < 65){
+                                var value: [UInt8] = [0x9F, 0x00, 0x00]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 45 && self.sliderval < 55){
+                                var value: [UInt8] = [0x7F, 0x00, 0x00]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 35 && self.sliderval < 45){
+                                var value: [UInt8] = [0x50, 0x00, 0x00]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 15 && self.sliderval < 35){
+                                var value: [UInt8] = [0x2B, 0x00, 0x00]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
                             else if(self.sliderval <= 10 ) {
                                 var value: [UInt8] = [0x05, 0x00, 0x00]
                                 let data = NSData(bytes: &value, length: value.count) as Data
@@ -591,8 +901,18 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
                             case .some(_): break
                                 
                             }
+                            
                         }
                     }
+                    else
+                    {
+                        var value: [UInt8] = [0x00, 0x00, 0x00]
+                        let data = NSData(bytes: &value, length: value.count) as Data
+                        //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                        peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                    }
+                    
+                    
                 }
                 
             }
@@ -710,6 +1030,7 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
         coloval.resignFirstResponder()
     }
     @objc public func cancelClick() {
+        coloval.text = ""
         coloval.resignFirstResponder()
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -755,18 +1076,95 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
                     self.present(alertController, animated: true, completion: nil)
                     
                 }
-              
                 else
                 {
-                      manager = CBCentralManager(delegate: self, queue: nil)
+                    if(alarmtxtfield.text?.isEmpty == false)
+                    {
+                        let triggerDaily = Calendar.current.dateComponents([.day,.month,.year,.hour,.minute,], from: datePicker.date)
+                        
+                        
+                        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: false)
+                        
+                        let alarmId = UUID().uuidString
+                        
+                        let content = UNMutableNotificationContent()
+                        content.title = "Notification"
+                        content.body = " Your Request to turn light ON is completed"
+                        //content.sound = UNNotificationSound.init(named: "your sound filename.mp3")
+                        content.categoryIdentifier = alarmId
+                        
+                        let request = UNNotificationRequest(identifier: "alarmIdentifier", content: content, trigger: trigger)
+                        
+                        //print("alarm identi   : \(alarmIdentifier)")
+                        
+                        UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
+                        UNUserNotificationCenter.current().add(request) {(error) in
+                            
+                            if let error = error {
+                                print("Uh oh! i had an error: \(error)")
+                            }
+                        }
+                        print("scheduling process")
+                        let timer = Timer(fireAt: datePicker.date, interval: 0, target: self, selector: #selector(sendcolor), userInfo: nil, repeats: false)
+                        RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
+                        
+                    }
+                    else {
+                        manager = CBCentralManager(delegate: self, queue: nil)
+                    }
+                    
                 }
         }
         else
-        {let alertController = UIAlertController(title: "Alert", message:
-                "Please On the Switch.", preferredStyle: UIAlertControllerStyle.alert)
-                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
-                self.present(alertController, animated: true, completion: nil)}
+        {
+//            let alertController = UIAlertController(title: "Alert", message:
+//                "Please On the Switch.", preferredStyle: UIAlertControllerStyle.alert)
+//                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+//                self.present(alertController, animated: true, completion: nil)
+            print("Turning offfffffff light")
+            manager = CBCentralManager(delegate: self, queue: nil)
+        }
+        
         }
     
+    @objc func sendcolor (_ sender: Any)
+    {
+        print(" Time triggered")
+      manager = CBCentralManager(delegate: self, queue: nil)
+    }
+    func showDatePicker(){
+        //Formate Date
+        datePicker.datePickerMode = .dateAndTime
+        
+        
+        //ToolBar
+        let toolbar = UIToolbar();
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donedatePicker));
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker));
+        
+        toolbar.setItems([doneButton,spaceButton,cancelButton], animated: false)
+        
+        alarmtxtfield.inputAccessoryView = toolbar
+        alarmtxtfield.inputView = datePicker
+        
+    }
+    
+    @objc func donedatePicker(){
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy HH:mm"
+        //formatter.timeStyle = DateFormatter.Style.short
+        
+        alarmtxtfield.text = formatter.string(from: datePicker.date)
+        self.view.endEditing(true)
+    }
+    
+    @objc func cancelDatePicker(){
+        alarmtxtfield.text = ""
+        self.view.endEditing(true)
+    }
+  
    
 }

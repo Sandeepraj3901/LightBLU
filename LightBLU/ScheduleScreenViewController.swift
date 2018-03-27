@@ -8,13 +8,25 @@
 
 import UIKit
 import UserNotifications
+import CoreBluetooth
 
-class ScheduleScreenViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate,UITextFieldDelegate{
+
+class ScheduleScreenViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate,UITextFieldDelegate, CBCentralManagerDelegate{
+
+    
     let colorval = ["Yellow", "Red", "Blue","Green","White","Orange","Black"]
     var pickerView = UIPickerView()
     let datePicker = UIDatePicker()
     var datee = DateComponents()
-   
+    let B_UUID =
+        CBUUID(string: "0000AB07-D102-11E1-9B23-00025B00A5A5")
+    //0000AB07-D102-11E1-9B23-00025B00A5A5--0x1802
+    let Device = CBUUID(string: "0x1800")
+    let Devicec = CBUUID(string: "0x2A00")
+    let BSERVICE_UUID =
+        CBUUID(string: "0000AB05-D102-11E1-9B23-00025B00A5A5")
+    var manager:CBCentralManager!
+    var peripherals:CBPeripheral!
     @IBOutlet weak var schedulertitle: UINavigationBar!
     @IBOutlet weak var alarmtextfield: UITextField!
     @IBOutlet weak var intensitytextfield: UITextField!
@@ -27,15 +39,20 @@ class ScheduleScreenViewController: UIViewController, UIPickerViewDataSource, UI
     
     }
     
-    
-  
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        if central.state == CBManagerState.poweredOn {
+            central.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : false])
+            
+        }
+        
+    }
     
     
    
     override func viewDidLoad() {
         self.navigationItem.title = "Scheduler";
         super.viewDidLoad()
-        
+         manager = CBCentralManager(delegate: self, queue: nil)
      self.view.backgroundColor = UIColor(patternImage: UIImage(named: "lb5")!)
         
 //        let backgroundImageView = UIImageView(image: UIImage(named: "lb5"))
@@ -151,6 +168,13 @@ class ScheduleScreenViewController: UIViewController, UIPickerViewDataSource, UI
     @objc func sendcolor (_ sender: Any)
     {
         print(" Time triggered")
+//        let vc : BluetoothTableViewController = BluetoothTableViewController()
+//        //vc.peripherals.discoverServices([BSERVICE_UUID])
+//        print(vc.peripherals)
+//        var value: [UInt8] = [0x00,0x00,0x77]
+//        let data = NSData(bytes: &value, length: value.count) as Data
+//        vc.peripherals.writeValue(data, for: CBCharacteristic, type: CBCharacteristicWriteType.withResponse)
+//
     }
     
     
