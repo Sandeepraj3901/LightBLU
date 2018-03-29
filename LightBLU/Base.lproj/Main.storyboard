@@ -18,28 +18,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cR5-Oi-gfA">
-                                <rect key="frame" x="16" y="621" width="86" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.98616129159927368" green="0.99649697542190552" blue="0.99180656671524048" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Get- Started">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="titleShadowColor" red="0.095384784042835236" green="0.096403025090694427" blue="0.53141254186630249" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <segue destination="5Q4-Vs-e5G" kind="show" id="0RQ-jw-JYg"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="LightBLU" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9M-FD-uIc">
-                                <rect key="frame" x="16" y="142" width="147" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="0.0" y="140" width="375" height="35"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <color key="backgroundColor" red="0.98616129159927368" green="0.99649697542190552" blue="0.99180656671524048" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&quot; Make your home Lighting Smarter &quot;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7e-dI-fWb">
+                                <rect key="frame" x="12" y="445" width="351" height="24"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <color key="backgroundColor" red="0.98616129159927368" green="0.99649697542190552" blue="0.99180656671524048" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="20"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QdK-UF-Flx">
-                                <rect key="frame" x="172" y="621" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="0.0" y="539" width="375" height="30"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <color key="backgroundColor" red="0.98616129159927368" green="0.99649697542190552" blue="0.99180656671524048" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Go">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -48,13 +43,6 @@
                                     <segue destination="tbm-5U-TyZ" kind="show" id="GPB-0e-RPg"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&quot; Make your home Lighting Smarter &quot;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E7e-dI-fWb">
-                                <rect key="frame" x="8" y="589" width="351" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.98616129159927368" green="0.99649697542190552" blue="0.99180656671524048" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="italicSystem" pointSize="20"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -116,7 +104,7 @@
                         <color key="sectionIndexBackgroundColor" red="0.090694956481456757" green="0.32998991012573242" blue="0.37870821356773376" alpha="0.67032320209999996" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="sectionIndexTrackingBackgroundColor" red="0.090694956481456757" green="0.32998991012573242" blue="0.37870821356773376" alpha="0.67032320209999996" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="myCell" textLabel="N47-u2-kqM" detailTextLabel="W5q-Ml-N4H" rowHeight="69" style="IBUITableViewCellStyleValue1" id="5ji-qU-23n">
+                            <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="5" reuseIdentifier="myCell" textLabel="N47-u2-kqM" detailTextLabel="W5q-Ml-N4H" rowHeight="69" style="IBUITableViewCellStyleValue1" id="5ji-qU-23n">
                                 <rect key="frame" x="0.0" y="28" width="375" height="69"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5ji-qU-23n" id="Jem-hh-9oK">
@@ -140,7 +128,8 @@
                                     </subviews>
                                     <color key="backgroundColor" red="0.090694956481456757" green="0.32998991012573242" blue="0.37870821356773376" alpha="0.67032320209999996" colorSpace="custom" customColorSpace="sRGB"/>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.090694956480000005" green="0.32998991010000001" blue="0.37870821360000001" alpha="0.67032320209999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.090694956480000005" green="0.32998991010000001" blue="0.37870821360000001" alpha="0.67032320209999996" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <segue destination="qdQ-We-GLM" kind="show" identifier="TabletoDevice" id="sld-u7-v64"/>
                                 </connections>
@@ -486,7 +475,7 @@
                                 <color key="onTintColor" red="0.3939576206" green="0.4818403657" blue="0.41928339190000002" alpha="0.25256614960000001" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="thumbTintColor" red="0.85545802116394043" green="0.90968352556228638" blue="0.44613838195800781" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </switch>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="69p-bn-bx0">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="69p-bn-bx0">
                                 <rect key="frame" x="171" y="118" width="204" height="30"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <color key="backgroundColor" red="0.3939576206" green="0.4818403657" blue="0.41928339190000002" alpha="0.25256614960000001" colorSpace="custom" customColorSpace="displayP3"/>

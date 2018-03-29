@@ -16,9 +16,9 @@ import UserNotifications
 
 
 class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate,
-                            CBCentralManagerDelegate, CBPeripheralDelegate, UITextFieldDelegate {
-   //let vc1 = DeviceViewController.self
- let datePicker = UIDatePicker()
+CBCentralManagerDelegate, CBPeripheralDelegate, UITextFieldDelegate {
+    //let vc1 = DeviceViewController.self
+    let datePicker = UIDatePicker()
     @IBOutlet weak var alarmtxtfield: UITextField!
     var name: String = " "
     var NAME: String = "LED BLU"
@@ -29,11 +29,11 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
     let Devicec = CBUUID(string: "0x2A00")
     let BSERVICE_UUID =
         CBUUID(string: "0000AB05-D102-11E1-9B23-00025B00A5A5")
-        
+    
     var sliderval = 0
     
     let dname: String = "welcome"
-   //let DynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
+    //let DynamoDBObjectMapper = AWSDynamoDBObjectMapper.default()
     @IBOutlet weak var switchval: UISwitch!
     @IBOutlet weak var idval: UITextField!
     
@@ -42,7 +42,7 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
         sender.minimumValue = 5.0
         sliderval = Int(sender.value)
         //var st = String(format:"%2X", sliderval)
-    
+        
         print(sliderval)
     }
     @IBOutlet weak var coloval: UITextField!
@@ -50,35 +50,35 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
     @IBOutlet var intensityval: UIView!
     let cval = ["Red", "Blue","Green", "White"]
     
-     var pickerView = UIPickerView()
+    var pickerView = UIPickerView()
     override func viewDidLoad() {
         
-       
-            self.navigationItem.title = "LED SCREEN";
-            super.viewDidLoad()
+        
+        self.navigationItem.title = "LED SCREEN";
+        super.viewDidLoad()
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler:{ didAllow , error in
             
         })
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "lb5")!)
-//        let backgroundImageView = UIImageView(image: UIImage(named: "lb5"))
-//        backgroundImageView.frame = view.frame
-//        backgroundImageView.contentMode = .scaleAspectFill
-//        view.addSubview(backgroundImageView)
-//        view.sendSubview(toBack: backgroundImageView)
+        //        let backgroundImageView = UIImageView(image: UIImage(named: "lb5"))
+        //        backgroundImageView.frame = view.frame
+        //        backgroundImageView.contentMode = .scaleAspectFill
+        //        view.addSubview(backgroundImageView)
+        //        view.sendSubview(toBack: backgroundImageView)
         
         
-//        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-//        backgroundImage.image = UIImage(named: "123.jpg")
-//        backgroundImage.contentMode = UIViewContentMode.scaleAspectFill
-//        self.view.insertSubview(backgroundImage, at: 0)
-             //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "123.jpg")!)
-            idval.text = "LED BLU "
-            //print("hlsajhljrhfasfg:\(vc.name)")
-            pickUp(coloval)
-         showDatePicker()
-           createid()
-            readval()
-       
+        //        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        //        backgroundImage.image = UIImage(named: "123.jpg")
+        //        backgroundImage.contentMode = UIViewContentMode.scaleAspectFill
+        //        self.view.insertSubview(backgroundImage, at: 0)
+        //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "123.jpg")!)
+        idval.text = "LED BLU "
+        //print("hlsajhljrhfasfg:\(vc.name)")
+        pickUp(coloval)
+        showDatePicker()
+        createid()
+        readval()
+        
         // Do any additional setup after loading the view.
     }
     
@@ -108,15 +108,15 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
     var peripheral:CBPeripheral!
     
     public func createid() {
-//        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast2,
-//                                                                identityPoolId:"us-east-2:0c1abe18-9c04-48d9-a362-f4cdb698834f")
-//
-//        let configuration = AWSServiceConfiguration(region:.USEast2, credentialsProvider:credentialsProvider)
-//
-//        AWSServiceManager.default().defaultServiceConfiguration = configuration
-//
-       
-      
+        //        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast2,
+        //                                                                identityPoolId:"us-east-2:0c1abe18-9c04-48d9-a362-f4cdb698834f")
+        //
+        //        let configuration = AWSServiceConfiguration(region:.USEast2, credentialsProvider:credentialsProvider)
+        //
+        //        AWSServiceManager.default().defaultServiceConfiguration = configuration
+        //
+        
+        
         
         let dynamoDbObjectMapper = AWSDynamoDBObjectMapper.default()
         
@@ -124,13 +124,13 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
         let newsItem: Sample = Sample()
         
         newsItem.userid = "welcome"
-            //AWSIdentityManager.default().identityId
-
+        //AWSIdentityManager.default().identityId
+        
         //Save a new item
         print("value for db:\(newsItem.userid)")
         dynamoDbObjectMapper.save(newsItem, completionHandler: {
             (error: Error?) -> Void in
-           // NSLog((error as! NSString) as String)
+            // NSLog((error as! NSString) as String)
             if let error = error {
                 print("Amazon DynamoDB Save Error: \(error)")
                 return
@@ -149,7 +149,7 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
             return nil
             
         }
-}
+    }
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         
         /*if(cell.contains(String(describing: peripheral.identifier.uuid)) == false && cell.count < 15)
@@ -168,7 +168,7 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
             print(peripherals)
             //perip.append(peripherals)
         }
-       // self.tableView.reloadData()
+        // self.tableView.reloadData()
         /* let device = (advertisementData as NSDictionary).object(forKey: CBAdvertisementDataLocalNameKey )
          as? NSString
          print(String(describing: device))
@@ -178,7 +178,7 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
         if(peripheral.name != nil)
         {
             name = peripheral.name!
-             idval?.text = name
+            idval?.text = name
             if (peripheral.name == "LED BLU")
             {
                 //self.sublabel.text = "Connected"
@@ -295,24 +295,24 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
                         {
                             switch(coloval?.text)
                             {
-
+                                
                             case "Red"?:   if(self.sliderval >= 95) {
-                                       // var st = String(format:"%2X", 100)
-                                        var value: [UInt8] = [0xFF, 0x00, 0x00]
-                                        let data = NSData(bytes: &value, length: value.count) as Data
-                            //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
-                                        peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
-                                        peripheral.readValue(for: thisCharacteristic)
-                                        break
-                                        }
-                                        else if(self.sliderval >= 85 && self.sliderval < 95){
+                                // var st = String(format:"%2X", 100)
+                                var value: [UInt8] = [0xFF, 0x00, 0x00]
+                                let data = NSData(bytes: &value, length: value.count) as Data
+                                //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                                peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                                peripheral.readValue(for: thisCharacteristic)
+                                break
+                            }
+                            else if(self.sliderval >= 85 && self.sliderval < 95){
                                 var value: [UInt8] = [0xE5, 0x00, 0x00]
                                 let data = NSData(bytes: &value, length: value.count) as Data
                                 //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
                                 peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
                                 peripheral.readValue(for: thisCharacteristic)
                                 break
-                                }
+                            }
                             else if(self.sliderval >= 75 && self.sliderval < 85){
                                 var value: [UInt8] = [0xCF, 0x00, 0x00]
                                 let data = NSData(bytes: &value, length: value.count) as Data
@@ -320,7 +320,7 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
                                 peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
                                 peripheral.readValue(for: thisCharacteristic)
                                 break
-                                }
+                            }
                             else if(self.sliderval >= 65 && self.sliderval < 75){
                                 var value: [UInt8] = [0xB9, 0x00, 0x00]
                                 let data = NSData(bytes: &value, length: value.count) as Data
@@ -328,7 +328,7 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
                                 peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
                                 peripheral.readValue(for: thisCharacteristic)
                                 break
-                                }
+                            }
                             else if(self.sliderval >= 55 && self.sliderval < 65){
                                 var value: [UInt8] = [0x9F, 0x00, 0x00]
                                 let data = NSData(bytes: &value, length: value.count) as Data
@@ -336,7 +336,7 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
                                 peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
                                 peripheral.readValue(for: thisCharacteristic)
                                 break
-                                }
+                            }
                             else if(self.sliderval >= 45 && self.sliderval < 55){
                                 var value: [UInt8] = [0x7F, 0x00, 0x00]
                                 let data = NSData(bytes: &value, length: value.count) as Data
@@ -344,7 +344,7 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
                                 peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
                                 peripheral.readValue(for: thisCharacteristic)
                                 break
-                                }
+                            }
                             else if(self.sliderval >= 35 && self.sliderval < 45){
                                 var value: [UInt8] = [0x50, 0x00, 0x00]
                                 let data = NSData(bytes: &value, length: value.count) as Data
@@ -352,7 +352,7 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
                                 peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
                                 peripheral.readValue(for: thisCharacteristic)
                                 break
-                                }
+                            }
                             else if(self.sliderval >= 15 && self.sliderval < 35){
                                 var value: [UInt8] = [0x2B, 0x00, 0x00]
                                 let data = NSData(bytes: &value, length: value.count) as Data
@@ -360,7 +360,7 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
                                 peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
                                 peripheral.readValue(for: thisCharacteristic)
                                 break
-                                }
+                            }
                             else if(self.sliderval <= 10 ) {
                                 var value: [UInt8] = [0x05, 0x00, 0x00]
                                 let data = NSData(bytes: &value, length: value.count) as Data
@@ -369,7 +369,7 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
                                 peripheral.readValue(for: thisCharacteristic)
                                 break
                                 }
-
+                                
                             case "Blue"?:  if(self.sliderval >= 95) {
                                 // var st = String(format:"%2X", 100)
                                 var value: [UInt8] = [0x00,0xFF, 0x00]
@@ -589,11 +589,11 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
                                 peripheral.readValue(for: thisCharacteristic)
                                 break
                                 }
-
+                                
                             case .none: break
-
+                                
                             case .some(_): break
-
+                                
                             }
                         }
                         else
@@ -904,15 +904,23 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
                             
                         }
                     }
-                    else
+                    else if(switchval.isOn == false && alarmtxtfield.text?.isEmpty == true)
                     {
                         var value: [UInt8] = [0x00, 0x00, 0x00]
                         let data = NSData(bytes: &value, length: value.count) as Data
                         //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
                         peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
                     }
-                    
-                    
+                    else if(alarmtxtfield.text?.isEmpty == false && switchval.isOn == false)
+                    {
+                        
+                        var value: [UInt8] = [0x00, 0x00, 0x00]
+                        let data = NSData(bytes: &value, length: value.count) as Data
+                        //let valueString = (data as NSString).data(using: String.Encoding.utf8.rawValue)
+                        peripheral.writeValue(data, for: thisCharacteristic, type: CBCharacteristicWriteType.withResponse)
+                        
+                    }
+                    else {}
                 }
                 
             }
@@ -946,10 +954,10 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
         manager.cancelPeripheralConnection(peripheral)
     }
     func readval() {
-       
+        
         
         // Initialize the Cognito Sync client
-       
+        
         let dynamoDbObjectMapper = AWSDynamoDBObjectMapper.default()
         
         // Create data object using data models you downloaded from Mobile Hub
@@ -957,14 +965,14 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
         //newsItem._userid = AWSIdentityManager.default().identityId
         
         dynamoDbObjectMapper.load(Sample.self, hashKey: newsItem.userid, rangeKey: "userid",
-                  completionHandler: {
-                (objectModel: AWSDynamoDBObjectModel?, error: Error?) -> Void in
-                    print("Checking :\(newsItem.userid as String)")
-                if let error = error {
-                    print("Amazon DynamoDB Read Error: \(error)")
-                    return
-                }
-                print("An item was read.")
+                                  completionHandler: {
+                                    (objectModel: AWSDynamoDBObjectModel?, error: Error?) -> Void in
+                                    print("Checking :\(newsItem.userid as String)")
+                                    if let error = error {
+                                        print("Amazon DynamoDB Read Error: \(error)")
+                                        return
+                                    }
+                                    print("An item was read.")
         })
         
         let syncClient = AWSCognito.default()
@@ -1024,7 +1032,7 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
         idval.resignFirstResponder()
         return true
     }
-
+    
     
     @objc  public func doneClick() {
         coloval.resignFirstResponder()
@@ -1045,92 +1053,118 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
     }
     
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
+    var i = 0
     @IBAction func saveBtn(_ sender: Any) {
         let id = idval.text
         
         if((id?.isEmpty)!)
         {
-//            let alertController = UIAlertController(title: "Alert", message:
-//                "Please enter ID ", preferredStyle: UIAlertControllerStyle.alert)
-//            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
-//            self.present(alertController, animated: true, completion: nil)
-           
+            //            let alertController = UIAlertController(title: "Alert", message:
+            //                "Please enter ID ", preferredStyle: UIAlertControllerStyle.alert)
+            //            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+            //            self.present(alertController, animated: true, completion: nil)
+            
         }
         else if(switchval.isOn)
         {      let id = coloval.text
-                if((id?.isEmpty)!)
-                {
-                    let alertController = UIAlertController(title: "Alert", message:
-                        "Please Select Color.", preferredStyle: UIAlertControllerStyle.alert)
-                    alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
-                    self.present(alertController, animated: true, completion: nil)
+            if((id?.isEmpty)!)
+            {
+                let alertController = UIAlertController(title: "Alert", message:
+                    "Please Select Color.", preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+                
+            }
+            else if(alarmtxtfield.text?.isEmpty == false)
+            {
+                let triggerDaily = Calendar.current.dateComponents([.day,.month,.year,.hour,.minute,], from: datePicker.date)
+                
+                i = 1
+                let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: false)
+                
+                let alarmId = UUID().uuidString
+                
+                let content = UNMutableNotificationContent()
+                content.title = "Notification"
+                content.body = " Your Request to turn light ON is completed"
+                //content.sound = UNNotificationSound.init(named: "your sound filename.mp3")
+                content.categoryIdentifier = alarmId
+                
+                let request = UNNotificationRequest(identifier: "alarmIdentifier", content: content, trigger: trigger)
+                
+                //print("alarm identi   : \(alarmIdentifier)")
+                
+                UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
+                UNUserNotificationCenter.current().add(request) {(error) in
                     
-                }
-                else
-                {
-                    if(alarmtxtfield.text?.isEmpty == false)
-                    {
-                        let triggerDaily = Calendar.current.dateComponents([.day,.month,.year,.hour,.minute,], from: datePicker.date)
-                        
-                        
-                        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: false)
-                        
-                        let alarmId = UUID().uuidString
-                        
-                        let content = UNMutableNotificationContent()
-                        content.title = "Notification"
-                        content.body = " Your Request to turn light ON is completed"
-                        //content.sound = UNNotificationSound.init(named: "your sound filename.mp3")
-                        content.categoryIdentifier = alarmId
-                        
-                        let request = UNNotificationRequest(identifier: "alarmIdentifier", content: content, trigger: trigger)
-                        
-                        //print("alarm identi   : \(alarmIdentifier)")
-                        
-                        UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
-                        UNUserNotificationCenter.current().add(request) {(error) in
-                            
-                            if let error = error {
-                                print("Uh oh! i had an error: \(error)")
-                            }
-                        }
-                        print("scheduling process")
-                        let timer = Timer(fireAt: datePicker.date, interval: 0, target: self, selector: #selector(sendcolor), userInfo: nil, repeats: false)
-                        RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
-                        
+                    if let error = error {
+                        print("Uh oh! i had an error: \(error)")
                     }
-                    else {
-                        manager = CBCentralManager(delegate: self, queue: nil)
-                    }
-                    
                 }
+                print("scheduling process")
+                let timer = Timer(fireAt: datePicker.date, interval: 0, target: self, selector: #selector(sendcolor), userInfo: nil, repeats: false)
+                RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
+                
+            }
+            else {
+                manager = CBCentralManager(delegate: self, queue: nil)
+            }
+            
+            
         }
-        else
-        {
-//            let alertController = UIAlertController(title: "Alert", message:
-//                "Please On the Switch.", preferredStyle: UIAlertControllerStyle.alert)
-//                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
-//                self.present(alertController, animated: true, completion: nil)
-            print("Turning offfffffff light")
+        else if(alarmtxtfield.text?.isEmpty == false && switchval.isOn == false)
+        { print("Turning offfffffff light")
+            let triggerDaily = Calendar.current.dateComponents([.day,.month,.year,.hour,.minute,], from: datePicker.date)
+            
+            
+            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDaily, repeats: false)
+            
+            let alarmId = UUID().uuidString
+            
+            let content = UNMutableNotificationContent()
+            content.title = "Notification"
+            content.body = " Your Request to turn light OFF is completed"
+            //content.sound = UNNotificationSound.init(named: "your sound filename.mp3")
+            content.categoryIdentifier = alarmId
+            
+            let request = UNNotificationRequest(identifier: "alarmIdentifier", content: content, trigger: trigger)
+            
+            //print("alarm identi   : \(alarmIdentifier)")
+            
+            UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
+            UNUserNotificationCenter.current().add(request) {(error) in
+                
+                if let error = error {
+                    print("Uh oh! i had an error: \(error)")
+                }
+            }
+            print("scheduling process")
+            let timer = Timer(fireAt: datePicker.date, interval: 0, target: self, selector: #selector(sendcolor), userInfo: nil, repeats: false)
+            RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
+            
+        }
+        else{ print("Turning offfffffff light")
             manager = CBCentralManager(delegate: self, queue: nil)
         }
         
-        }
+        
+    }
     
     @objc func sendcolor (_ sender: Any)
     {
         print(" Time triggered")
-      manager = CBCentralManager(delegate: self, queue: nil)
+        manager = CBCentralManager(delegate: self, queue: nil)
     }
     func showDatePicker(){
         //Formate Date
@@ -1165,6 +1199,7 @@ class LEDScreenViewController: UIViewController, UIPickerViewDataSource, UIPicke
         alarmtxtfield.text = ""
         self.view.endEditing(true)
     }
-  
-   
+    
+    
 }
+
